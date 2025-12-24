@@ -8,9 +8,8 @@ export default defineConfig(({ mode }) => {
     // 如果仓库名是 username.github.io（且用户名匹配），使用 '/'，否则使用仓库名作为路径
     const repository = process.env.GITHUB_REPOSITORY || 'HungliChou/corefit-landingPage.github.io';
     const [username, repoName] = repository.split('/');
-    // 只有当仓库名是 username.github.io 格式时才使用根路径
-    const isUserPage = repoName === `${username}.github.io`;
-    const base = isUserPage ? '/' : `/${repoName}/`;
+    
+    const base = '/'
     
     return {
       base,
