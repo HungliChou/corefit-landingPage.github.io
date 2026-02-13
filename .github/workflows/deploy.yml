@@ -35,7 +35,12 @@ jobs:
         run: npm run build
         env:
           GITHUB_REPOSITORY: ${{ github.repository }}
-      
+
+      - name: Copy download page and logo
+        run: |
+          cp -r download dist/
+          cp logo.png dist/
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
       
