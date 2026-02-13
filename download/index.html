@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>下載 CoreFit</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #121212;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+    .logo { width: 120px; height: auto; margin-bottom: 24px; }
+    h1 { font-size: 1.5rem; margin: 0 0 8px; font-weight: 600; }
+    .sub { color: #A2A2A2; font-size: 0.95rem; margin-bottom: 24px; }
+    .btns { display: flex; flex-direction: column; gap: 12px; max-width: 280px; width: 100%; }
+    .btn {
+      display: block;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn:active { opacity: 0.85; }
+    .btn-ios { background: #000; color: #fff; }
+    .btn-android { background: #3ddc84; color: #000; }
+    .hint { margin-top: 20px; font-size: 0.85rem; color: #666; }
+    .not-available { margin-top: 16px; padding: 12px; background: #1A1A1A; border-radius: 8px; font-size: 0.9rem; color: #A2A2A2; display: none; }
+    .not-available.show { display: block; }
+  </style>
+</head>
+<body>
+  <img class="logo" src="../logo.png" alt="CoreFit" />
+  <h1>下載 CoreFit</h1>
+  <p class="sub">正在前往下載頁面…</p>
+  <div class="btns">
+    <a id="btn-ios" class="btn btn-ios" href="#">iOS 下載</a>
+    <a id="btn-android" class="btn btn-android" href="#">Android 下載</a>
+  </div>
+  <p class="hint">若沒有自動跳轉，請點按鈕</p>
+  <p id="not-available" class="not-available">iOS 版本尚未上架，敬請期待。</p>
+
+  <script>
+    // ---------- 可配置常數（上架後請填寫）----------
+    var IOS_APPSTORE_URL = "TODO_APPSTORE_URL";       // 上架後填 https://apps.apple.com/app/idxxxx
+    var ANDROID_PLAY_URL = "TODO_PLAY_URL";           // 上架後填 https://play.google.com/store/apps/details?id=xxxx
+    var IOS_TESTFLIGHT_URL = "";                      // 選填：TestFlight 連結，App Store 未填時使用
+    // ----------------------------------------------
+
+    (function () {
+      var ua = navigator.userAgent || "";
+      var isIOS = /iPad|iPhone|iPod/.test(ua) || (ua.indexOf("Mac") !== -1 && "ontouchend" in document);
+      var isAndroid = /Android/i.test(ua);
+
+      var allowedHosts = ["apps.apple.com", "itunes.apple.com", "play.google.com"];
+      function isAllowed(url) {
+        if (!url || url === "TODO_APPSTORE_URL" || url === "TODO_PLAY_URL") return false;
+        try {
+          var u = new URL(url);
+          return allowedHosts.some(function (h) { return u.hostname === h || u.hostname.endsWith("." + h); });
+        } catch (e) { return false; }
+      }
+
+      var iosUrl = IOS_APPSTORE_URL && isAllowed(IOS_APPSTORE_URL) ? IOS_APPSTORE_URL : (IOS_TESTFLIGHT_URL && isAllowed(IOS_TESTFLIGHT_URL) ? IOS_TESTFLIGHT_URL : null);
+      var androidUrl = ANDROID_PLAY_URL && isAllowed(ANDROID_PLAY_URL) ? ANDROID_PLAY_URL : null;
+
+      var btnIos = document.getElementById("btn-ios");
+      var btnAndroid = document.getElementById("btn-android");
+      var notAvailable = document.getElementById("not-available");
+
+      if (iosUrl) {
+        btnIos.href = iosUrl;
+        btnIos.target = "_blank";
+        btnIos.rel = "noopener noreferrer";
+      } else {
+        btnIos.href = "#";
+        btnIos.onclick = function (e) {
+          e.preventDefault();
+          notAvailable.classList.add("show");
+        };
+      }
+      if (androidUrl) {
+        btnAndroid.href = androidUrl;
+        btnAndroid.target = "_blank";
+        btnAndroid.rel = "noopener noreferrer";
+      } else {
+        btnAndroid.href = "#";
+        btnAndroid.onclick = function (e) { e.preventDefault(); };
+      }
+
+      setTimeout(function () {
+        if (isAndroid && androidUrl) {
+          window.location.assign(androidUrl);
+          return;
+        }
+        if (isIOS) {
+          if (iosUrl) {
+            window.location.assign(iosUrl);
+          } else {
+            notAvailable.classList.add("show");
+          }
+        }
+      }, 300);
+    })();
+  </script>
+</body>
+</html>
