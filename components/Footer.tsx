@@ -25,8 +25,8 @@ const Footer: React.FC<FooterProps> = ({ content }) => {
           <div>
             <h4 className="text-white font-bold mb-4">{content.footer.contact}</h4>
             <ul className="space-y-2 text-text-muted text-sm">
-              <li className="flex items-center gap-2"><Mail className="w-4 h-4"/> support@corefit.app</li>
-              <li>business@corefit.app</li>
+              <li className="flex items-center gap-2"><Mail className="w-4 h-4"/> support@corefit-ai.com</li>
+              <li>business@corefit-ai.com</li>
             </ul>
           </div>
           
@@ -41,6 +41,11 @@ const Footer: React.FC<FooterProps> = ({ content }) => {
         </div>
         
         <div className="border-t border-white/5 pt-8 text-center text-text-muted text-sm">
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mb-4">
+            <a href="/terms/" className="hover:text-primary-blue transition-colors">服務條款</a>
+            <a href="/privacy/" className="hover:text-primary-blue transition-colors">隱私權政策</a>
+            <a href="/delete-account/" className="hover:text-primary-blue transition-colors">刪除帳號</a>
+          </div>
           <p>{content.footer.copyright}</p>
         </div>
       </div>
