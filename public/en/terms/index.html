@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoreFit Terms of Service and End User License Terms | CoreFit</title>
+  <meta name="description" content="CoreFit Terms of Service, subscription terms, CorePoint rules, and end user license terms." />
+  <link rel="canonical" href="https://www.corefit-ai.com/en/terms" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://www.corefit-ai.com/terms" />
+  <link rel="alternate" hreflang="en" href="https://www.corefit-ai.com/en/terms" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #121212;
+      --panel: #1a1a1a;
+      --line: rgba(255, 255, 255, 0.10);
+      --text: #f7f7f7;
+      --muted: #a8adb7;
+      --blue: #1a75ff;
+      --purple: #614fff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Noto Sans TC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: #8db8ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .shell { min-height: 100vh; }
+    header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(18, 18, 18, 0.86);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    .brand img { width: 34px; height: 34px; border-radius: 8px; }
+    .links { display: flex; gap: 18px; flex-wrap: wrap; justify-content: flex-end; align-items: center; }
+    .links a { color: var(--muted); font-size: 14px; font-weight: 600; }
+    .language-link {
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 6px;
+      padding: 6px 10px;
+      color: #fff !important;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 54px 22px 76px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      padding: 6px 10px;
+      border: 1px solid rgba(26, 117, 255, 0.32);
+      border-radius: 6px;
+      color: #9fc4ff;
+      background: rgba(26, 117, 255, 0.10);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    article {
+      background: rgba(26, 26, 26, 0.72);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 32px;
+    }
+    h1, h2, h3 {
+      line-height: 1.28;
+      letter-spacing: 0;
+      color: #fff;
+    }
+    h1 { font-size: clamp(30px, 5vw, 46px); margin: 0 0 18px; }
+    h2 { font-size: 24px; margin: 34px 0 12px; padding-top: 8px; }
+    h3 { font-size: 18px; margin: 26px 0 10px; }
+    p, li { color: #d8dbe2; font-size: 16px; }
+    p { margin: 0 0 16px; }
+    ul, ol { padding-left: 22px; margin: 0 0 18px; }
+    li { margin: 6px 0; }
+    strong { color: #fff; }
+    hr { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; margin: 16px 0 22px; }
+    table { width: 100%; border-collapse: collapse; min-width: 620px; }
+    th, td { border-bottom: 1px solid var(--line); padding: 12px 14px; text-align: left; vertical-align: top; }
+    th { background: rgba(255, 255, 255, 0.06); color: #fff; font-weight: 800; }
+    td { color: #d8dbe2; }
+    tr:last-child td { border-bottom: 0; }
+    .request-form { display: grid; gap: 18px; margin: 18px 0 24px; padding: 22px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255, 255, 255, 0.04); }
+    .field { display: grid; gap: 8px; }
+    label { color: #fff; font-weight: 700; line-height: 1.4; }
+    .hint { color: var(--muted); font-size: 14px; margin: 0; }
+    input, textarea { width: 100%; border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 8px; background: rgba(18, 18, 18, 0.86); color: var(--text); font: inherit; padding: 12px 14px; }
+    textarea { min-height: 118px; resize: vertical; }
+    input:focus, textarea:focus { border-color: rgba(141, 184, 255, 0.86); box-shadow: 0 0 0 3px rgba(26, 117, 255, 0.18); outline: none; }
+    .checkbox-field { display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: start; }
+    .checkbox-field input { width: 18px; height: 18px; margin-top: 4px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    button { border: 0; border-radius: 8px; cursor: pointer; font: inherit; font-weight: 800; padding: 12px 16px; }
+    .primary-button { background: var(--blue); color: white; }
+    .secondary-button { background: rgba(255, 255, 255, 0.10); color: white; border: 1px solid rgba(255, 255, 255, 0.14); }
+    .status-message { color: #9fc4ff; font-size: 14px; min-height: 22px; margin: 0; }
+    footer { border-top: 1px solid var(--line); color: var(--muted); text-align: center; padding: 28px 18px 34px; font-size: 14px; }
+    @media (max-width: 640px) {
+      .nav { align-items: flex-start; flex-direction: column; }
+      .links { justify-content: flex-start; }
+      main { padding-top: 34px; }
+      article { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <nav class="nav" aria-label="CoreFit legal navigation">
+        <a class="brand" href="/">
+          <img src="/logo.png" alt="" />
+          <span>CoreFit</span>
+        </a>
+        <div class="links">
+          <a href="/en/terms/">Terms</a>
+          <a href="/en/privacy/">Privacy Policy</a>
+          <a href="/en/delete-account/">Delete Account</a>
+          <a class="language-link" href="/terms/">繁體中文</a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <span class="eyebrow">CoreFit Legal</span>
+      <article>
+<h1>CoreFit Terms of Service and End User License Terms</h1>
+<p><strong>Last Updated: May 11, 2026</strong> <strong>Effective Date: May 11, 2026</strong></p>
+<p>Welcome to CoreFit (the &quot;App&quot; or the &quot;Service&quot;). These Terms of Service (the &quot;Terms&quot;) form a legally binding agreement between you and <strong>CHENHSI TECHNOLOGY CO., LTD.</strong> (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;).</p>
+<p><strong>Please read these Terms carefully before using the Service. By registering an account or using the Service, you acknowledge that you have read, understood, and agree to be bound by these Terms. If you do not agree to any part of these Terms, please do not use the Service.</strong></p>
+<hr />
+<h2>1. Agreement and Acceptance</h2>
+<p>1.1 When you download, install, register for, or otherwise use the App, you agree to these Terms and our Privacy Policy (<a href="https://www.corefit-ai.com/privacy">https://www.corefit-ai.com/privacy</a>).</p>
+<p>1.2 If you use the Service on behalf of an organization or business, such as through a business coach account, you represent that you have authority to accept these Terms on behalf of that organization.</p>
+<hr />
+<h2>2. Service Description</h2>
+<p>2.1 CoreFit is an AI-powered fitness training management app that primarily provides:</p>
+<ul>
+  <li><strong>Workout logging</strong>: record workouts, exercises, sets, reps, weights, and related details</li>
+  <li><strong>Exercise library</strong>: exercise descriptions and demonstration videos</li>
+  <li><strong>Training plans and templates</strong>: create, manage, and use training plans and workout templates</li>
+  <li><strong>AI Coach</strong>: generate personalized training plans and weight suggestions using AI technology</li>
+  <li><strong>Progress tracking</strong>: personal record tracking, training volume charts, and estimated 1RM calculations</li>
+  <li><strong>Social features</strong>: friend system and workout content sharing</li>
+  <li><strong>Coach features</strong> (Coach plan): student management, workout assignment, and completion tracking</li>
+  <li><strong>Official courses</strong>: training plans designed by the CoreFit team (Pro/Coach plans)</li>
+</ul>
+<p>2.2 We may add, modify, or remove features from time to time. Material changes will be notified in accordance with Section 19.</p>
+<hr />
+<h2>3. Eligibility</h2>
+<p>3.1 The App is content-rated <strong>4+</strong> on Apple App Store and Google Play (meaning the content is suitable for users aged 4 and above) and does not contain violence, sexual content, or other content unsuitable for general audiences. The Service is generally available to users who can understand and agree to these Terms, subject to the following:</p>
+<ul>
+  <li><strong>Under 13</strong>: a parent or legal guardian must read and agree to these Terms and the Privacy Policy, and you may only use the Service with their supervision. We <strong>do not</strong> knowingly collect personal data from children under 13 without verifiable consent from a parent or legal guardian. If we become aware that we have collected such data, we will delete it as soon as practicable and close the account.</li>
+  <li><strong>Aged 13 or older but under the legal age of majority</strong> (18 years old under the laws of the Republic of China (Taiwan)): you must obtain consent from your legal representative (parent or guardian) before using the Service, and your legal representative should read and agree to these Terms and the Privacy Policy.</li>
+</ul>
+<p>3.2 You represent and warrant that the registration information you provide is true, accurate, and complete, and that if you are a minor, you have obtained consent from your legal representative. If you are a legal representative accepting these Terms on behalf of a minor, you agree to be responsible for the minor&#39;s use of the Service.</p>
+<hr />
+<h2>4. Account Registration and Management</h2>
+<h3>4.1 Account Creation</h3>
+<p>You may create a CoreFit account through:</p>
+<ul>
+  <li>Email address and password registration</li>
+  <li>Google account sign-in</li>
+  <li>Apple account sign-in</li>
+</ul>
+<p>After account creation, you must set a unique username (8-20 characters, limited to letters, numbers, underscores, and hyphens).</p>
+<h3>4.2 Account Security</h3>
+<ul>
+  <li>You are responsible for safeguarding your account password and login credentials.</li>
+  <li>You are responsible for all activity under your account.</li>
+  <li>If you discover unauthorized use of your account, please notify us immediately.</li>
+  <li>We are not liable for losses caused by your failure to properly safeguard account information.</li>
+</ul>
+<h3>4.3 Account Transfer</h3>
+<p>Your account is personal to you and may not be transferred, sold, or authorized for use by others without our written consent.</p>
+<hr />
+<h2>5. Subscriptions and Payments</h2>
+<h3>5.1 Subscription Plans</h3>
+<p>The App offers the following subscription plans:</p>
+<div class="table-wrap"><table><thead><tr><th>Plan</th><th>Description</th></tr></thead><tbody>
+<tr><td><strong>Free</strong></td><td>Basic features, including limited numbers of plans and templates</td></tr>
+<tr><td><strong>Pro</strong></td><td>Full feature access, AI Coach, official courses, and 100 monthly CorePoint - Subscription credits</td></tr>
+<tr><td><strong>Coach</strong></td><td>All Pro features plus student management features (base 10 seats) and 150 monthly CorePoint - Subscription credits</td></tr>
+</tbody></table></div>
+<h3>5.2 Billing Cycles and Prices</h3>
+<ul>
+  <li>Subscriptions may be offered on monthly, quarterly, annual, or other billing cycles depending on platform and region. The actual available cycles are those shown on the Apple App Store or Google Play Store purchase screen.</li>
+  <li>Actual prices are those shown by the Apple App Store or Google Play Store.</li>
+  <li>Prices may vary by region, currency, taxes, platform, and promotions.</li>
+</ul>
+<h3>5.3 Auto-Renewal</h3>
+<ul>
+  <li>All paid subscriptions automatically renew unless cancelled at least 24 hours before the end of the current billing period.</li>
+  <li>Renewal charges will be made to your payment account within 24 hours before the end of the current billing period.</li>
+</ul>
+<h3>5.4 Cancellation</h3>
+<p>You may cancel your subscription at any time:</p>
+<ul>
+  <li><strong>iOS users</strong>: Settings &gt; Apple ID &gt; Subscriptions &gt; CoreFit &gt; Cancel Subscription</li>
+  <li><strong>Android users</strong>: Google Play Store &gt; Subscriptions &gt; CoreFit &gt; Cancel Subscription</li>
+  <li><strong>In App</strong>: Me &gt; Subscription Plan &gt; Manage Subscription</li>
+</ul>
+<p>After cancellation, you may continue using Pro/Coach features until the end of the paid billing period. Your account will then return to the Free plan.</p>
+<h3>5.5 Refunds</h3>
+<ul>
+  <li>Subscription transactions are processed by Apple App Store or Google Play Store. Refund requests must be submitted directly to Apple or Google.</li>
+  <li><strong>Apple refunds</strong>: <a href="https://reportaproblem.apple.com">https://reportaproblem.apple.com</a></li>
+  <li><strong>Google Play refunds</strong>: <a href="https://support.google.com/googleplay/answer/2479637">https://support.google.com/googleplay/answer/2479637</a></li>
+  <li>We cannot process refunds directly. Approval is determined by Apple or Google under their policies.</li>
+</ul>
+<h3>5.6 Price Changes</h3>
+<ul>
+  <li>We reserve the right to adjust subscription prices.</li>
+  <li>Price changes will be notified to existing subscribers through Apple/Google mechanisms.</li>
+  <li>Price changes will not affect your current paid billing period and will apply from the next renewal cycle.</li>
+  <li>If you do not agree to a new price, you may cancel before the new price takes effect.</li>
+</ul>
+<h3>5.7 Additional Purchases</h3>
+<p>In addition to subscriptions, the App offers:</p>
+<ul>
+  <li><strong>Coach seat packs</strong>: additional student seats for Coach plan users. Actual seat quantities, prices, and available products are shown on the purchase screen.</li>
+  <li><strong>Point packs</strong>: purchase 100 CorePoint - Permanent credits.</li>
+</ul>
+<p>These items are one-time purchases. Except as required by Apple/Google refund policies or applicable law, delivered points, seats, or other one-time purchase items are generally non-refundable.</p>
+<h3>5.8 Free Trials</h3>
+<ul>
+  <li>Some subscription plans and billing cycles may offer free trials. The actual trial length, eligible plan, and eligibility are shown by Apple App Store or Google Play Store at purchase and may vary by region, platform, and whether you have previously used the same offer.</li>
+  <li>You may cancel through Apple App Store or Google Play Store during the trial. Cancel at least 24 hours before the trial ends to avoid renewal charges.</li>
+  <li>If you do not cancel at least 24 hours before the trial ends, the subscription will convert to a paid subscription and be charged by Apple/Google according to the billing cycle.</li>
+  <li>Each user generally receives a particular free trial only once, subject to platform rules.</li>
+</ul>
+<h3>5.9 Purchase Disclosures</h3>
+<p>Before you complete a subscription or one-time purchase, the Apple App Store or Google Play Store purchase screen will show product name, price, billing cycle, auto-renewal status, trial period, taxes, cancellation method, and other information. If these Terms conflict with the purchase screen for a transaction, the platform purchase screen controls for that transaction&#39;s price, cycle, trial, and renewal information.</p>
+<hr />
+<h2>6. CorePoint System</h2>
+<h3>6.1 Point Types</h3>
+<div class="table-wrap"><table><thead><tr><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><strong>CorePoint - Permanent</strong></td><td>Obtained through purchase and does not expire</td></tr>
+<tr><td><strong>CorePoint - Subscription</strong></td><td>Resets monthly and is provided with subscription plans (Pro: 100 / Coach: 150); cannot be carried over to the next month</td></tr>
+</tbody></table></div>
+<h3>6.2 Use of CorePoint</h3>
+<p>CorePoint may be used for AI features, such as AI training plan generation and plan modification. CorePoint - Subscription credits are deducted first; if insufficient, CorePoint - Permanent credits are deducted.</p>
+<h3>6.3 Point Rules</h3>
+<ul>
+  <li>When a subscription expires or is cancelled, CorePoint - Subscription credits reset to zero; CorePoint - Permanent credits remain.</li>
+  <li>On subscription renewal, CorePoint - Subscription credits reset to that plan&#39;s quota and do not accumulate.</li>
+  <li>Upon refund, corresponding CorePoint - Subscription credits will reset to zero; for CorePoint - Permanent purchase refunds, corresponding points may be deducted or voided.</li>
+  <li>CorePoint has no cash value and may not be redeemed for cash, transferred, resold, or moved to another account unless we expressly allow it or applicable law requires otherwise.</li>
+</ul>
+<hr />
+<h2>7. AI Feature Terms</h2>
+<h3>7.1 Scope of AI Features</h3>
+<p>AI features provided by the App include:</p>
+<ul>
+  <li><strong>AI training plan generation</strong>: generate personalized training plans through AI conversation based on your fitness goals, preferences, and training history</li>
+  <li><strong>Smart weight suggestion</strong>: suggest suitable training weights based on your training history</li>
+</ul>
+<h3>7.2 AI Limitations and Disclaimer</h3>
+<ul>
+  <li>AI-generated content is for reference only and <strong>does not constitute professional fitness instruction, medical advice, or any form of professional consultation</strong>.</li>
+  <li>AI suggestions may be inaccurate, unsuitable for your individual circumstances, or contain errors. You should independently assess appropriateness before use.</li>
+  <li>We do not guarantee that AI features will operate normally at all times or produce satisfactory results.</li>
+  <li>AI features consume points; availability depends on your point balance.</li>
+  <li>AI-generated training plans become your User Content once you confirm and save them, and Section 8 applies.</li>
+</ul>
+<hr />
+<h2>8. User Content</h2>
+<h3>8.1 Definition</h3>
+<p>&quot;User Content&quot; means all content you create, upload, or generate through the App, including custom exercises, custom training plans, workout templates, workout records, notes, profile photos, profile information, and AI-generated content that you save.</p>
+<h3>8.2 Your Rights</h3>
+<p>You retain all rights to your User Content. We do not claim ownership of your User Content.</p>
+<h3>8.3 License</h3>
+<p>To provide the Service, you grant us a non-exclusive, royalty-free, worldwide, sublicensable limited license to:</p>
+<ul>
+  <li>store, process, and display your User Content within the scope of providing the Service</li>
+  <li>display content to the recipients you choose when you share content, such as friends or students</li>
+  <li>technically process your content to maintain service quality, such as backup and caching</li>
+</ul>
+<p>This license ends when you delete the related content or account, except for copies already shared with others and stored in their accounts.</p>
+<h3>8.4 Content Responsibility</h3>
+<ul>
+  <li>You are fully responsible for your User Content.</li>
+  <li>You represent and warrant that your User Content does not infringe any third-party intellectual property or other rights.</li>
+  <li>We may, but are not obligated to, remove User Content that we believe violates these Terms.</li>
+</ul>
+<hr />
+<h2>9. Prohibited Conduct</h2>
+<p>When using the Service, you must not:</p>
+<ol>
+  <li>Violate any applicable law or regulation.</li>
+  <li>Infringe any third-party intellectual property, privacy, or other rights.</li>
+  <li>Upload viruses, malware, or other harmful code.</li>
+  <li>Attempt unauthorized access to any part of the Service, servers, or networks.</li>
+  <li>Reverse engineer, decompile, or disassemble the App.</li>
+  <li>Use automated tools, including bots or crawlers, to access or extract Service content or data.</li>
+  <li>Impersonate others or misrepresent your relationship with any person or entity.</li>
+  <li>Use the Service to send spam, harassment, or offensive content.</li>
+  <li>Sell, transfer, or otherwise move accounts, subscriptions, or points to others.</li>
+  <li>Use the Service in any way that could damage, disable, overburden, or impair the Service.</li>
+  <li>Circumvent, disable, or interfere with Service security features or usage limits.</li>
+</ol>
+<p>Violation may result in account suspension or termination without refund.</p>
+<hr />
+<h2>10. Intellectual Property</h2>
+<h3>10.1 Our Intellectual Property</h3>
+<p>The App and all of its content, including software code, UI design, graphics, icons, text, exercise library data, official training plans, and demonstration video arrangements, are protected by copyright, trademark, and other intellectual property laws. Except for rights expressly granted in these Terms, we reserve all rights.</p>
+<h3>10.2 Limited License</h3>
+<p>We grant you a personal, non-exclusive, non-transferable, revocable limited license to install and use the App on your personal device in accordance with these Terms. This license does not include:</p>
+<ul>
+  <li>unauthorized modification, copying, or distribution of the App or its content; however, sharing workout records, schedules, plans, or other User Content that you have the right to share through built-in Service sharing features is permitted</li>
+  <li>using the App for commercial resale</li>
+  <li>removing copyright notices or other rights notices from the App</li>
+</ul>
+<h3>10.3 Exercise Library and Video Content</h3>
+<p>Some demonstration videos in the App&#39;s exercise library may be produced by us or provided by legally licensed third parties. Rights belong to us or the relevant rights holders. If you use custom exercises or other features to enter a YouTube link yourself, that link and related video content are provided by you, and the rights and availability belong to the original rights holders and YouTube. We do not claim ownership of such user-provided third-party video content.</p>
+<h3>10.4 App Store and Google Play License</h3>
+<p>The App is licensed, not sold. You receive a limited right to install and use the App on your personal device under these Terms. If you download the App through Apple App Store, Apple&#39;s Standard End User License Agreement and Apple Media Services Terms may also apply. If you download the App through Google Play, Google Play terms may also apply.</p>
+<h3>10.5 Platform Terms Priority</h3>
+<p>Platform payment, download, update, refund, family sharing, subscription management, and platform account matters are handled under Apple App Store or Google Play Store rules. If these Terms conflict with platform rules on platform transaction matters, the platform rules control to the extent of the conflict.</p>
+<hr />
+<h2>11. Health and Exercise Risk Disclaimer</h2>
+<p><strong>11.1 All training plans, weight suggestions, exercise descriptions, and AI-generated content provided by the App are for general fitness reference only and do not constitute medical advice, physical therapy advice, diagnosis, or treatment by any medical professional.</strong></p>
+<p>11.2 Before starting any exercise program, we recommend consulting a qualified medical professional, especially if you:</p>
+<ul>
+  <li>have known or suspected cardiovascular disease</li>
+  <li>have chronic disease or existing injury</li>
+  <li>are pregnant or postpartum</li>
+  <li>have not exercised for a long period</li>
+  <li>are taking medication that may affect exercise performance</li>
+</ul>
+<p>11.3 Exercise involves risk of injury. By training with the App, you understand and voluntarily assume this risk. You should assess the suitability of training content based on your physical condition and ability.</p>
+<p>11.4 If you feel discomfort, pain, or abnormal symptoms during training, stop exercising immediately and seek medical assistance.</p>
+<p>11.5 We are not responsible for any physical injury, health issue, or loss caused by using the App&#39;s training suggestions or AI-generated content.</p>
+<hr />
+<h2>12. Service Interruption, Changes, and Termination</h2>
+<h3>12.1 Service Availability</h3>
+<ul>
+  <li>We work to maintain stable operation of the Service, but we <strong>do not guarantee</strong> uninterrupted or error-free operation at all times.</li>
+  <li>The App provides offline functionality, but some features, such as AI generation, cloud sync, and social features, require network connection.</li>
+</ul>
+<h3>12.2 Service Changes</h3>
+<ul>
+  <li>We reserve the right to modify, update, or discontinue all or part of the Service at any time.</li>
+  <li>Material feature changes will be notified in advance in a reasonable way, such as in-app notice or email.</li>
+</ul>
+<h3>12.3 Our Right to Terminate the Service</h3>
+<ul>
+  <li>If we decide to permanently terminate the Service, we will notify users within a reasonable period in advance and explain how existing subscriptions will be handled.</li>
+</ul>
+<hr />
+<h2>13. Account Termination and Deletion</h2>
+<h3>13.1 Termination by You</h3>
+<ul>
+  <li>You may stop using the Service at any time.</li>
+  <li>To delete your account, please refer to the account deletion instructions in our Privacy Policy (<a href="https://www.corefit-ai.com/privacy">https://www.corefit-ai.com/privacy</a>) or email support@corefit-ai.com.</li>
+  <li>You may go to Me &gt; Settings &gt; Delete Account in the App to complete the deletion process. After deletion, your personal data, workout records, custom exercises, training plans, templates, friend/student relationships, and related data will be handled according to these Terms and the Privacy Policy.</li>
+</ul>
+<h3>13.2 Termination by Us</h3>
+<p>We reserve the right to suspend or terminate your account if:</p>
+<ul>
+  <li>you violate any provision of these Terms</li>
+  <li>your account involves fraud, abuse, or illegal activity</li>
+  <li>law or regulation requires us to do so</li>
+  <li>termination is necessary to protect the Service or other users</li>
+</ul>
+<p>We will notify you in advance where feasible, but may suspend an account without notice in urgent situations such as security threats.</p>
+<h3>13.3 Consequences of Account Termination</h3>
+<ul>
+  <li>After account termination, you will no longer be able to access your account or its content.</li>
+  <li>Subscription fees paid for accounts terminated due to Terms violations are <strong>non-refundable</strong>.</li>
+  <li>Content shared with others may continue to exist as copies in their accounts.</li>
+  <li><strong>Please cancel your subscription through Apple/Google before account termination</strong> to avoid continued charges.</li>
+</ul>
+<hr />
+<h2>14. Third-Party Services and Links</h2>
+<p>14.1 The App integrates with or links to third-party services, including Appwrite, RevenueCat, OpenAI, Google OAuth, Apple Sign-In, and YouTube. These services are governed by their own terms and privacy policies.</p>
+<p>14.2 We are not responsible for the availability, accuracy, security, acts, or omissions of third-party services.</p>
+<p>14.3 When using third-party services, you should read and agree to their terms.</p>
+<hr />
+<h2>15. Limitation of Liability</h2>
+<p><strong>15.1 To the maximum extent permitted by applicable law, we and our affiliates, directors, employees, and agents are not liable for any indirect, incidental, special, consequential, or punitive damages arising from or related to the Service or these Terms, including loss of profits, loss of data, damage to goodwill, or business interruption, whether based on contract, tort, strict liability, or other legal theory, even if advised of the possibility of such damages.</strong></p>
+<p>15.2 The above limitation does not apply to damages caused by our intentional misconduct or gross negligence, and does not exclude liability that applicable law does not allow to be excluded or limited.</p>
+<hr />
+<h2>16. Dispute Resolution</h2>
+<p>16.1 The parties agree to first attempt to resolve disputes arising from these Terms or the Service through good-faith negotiation.</p>
+<p>16.2 If negotiation fails, the parties agree to submit the dispute to the Chinese Arbitration Association, Taipei, for arbitration under its arbitration rules. The seat of arbitration will be Taipei, Taiwan, and the arbitration language will be Chinese.</p>
+<p>16.3 The arbitral award is binding on both parties and may be enforced by a court according to law.</p>
+<p>16.4 During arbitration, either party may seek preservation measures or provisional injunctions from a court with jurisdiction.</p>
+<p>16.5 <strong>Class Action Waiver</strong>: To the maximum extent permitted by applicable law, you agree to bring disputes only in your individual capacity and not as a class action or representative action, and not to participate in any such proceeding.</p>
+<hr />
+<h2>17. Governing Law and Jurisdiction</h2>
+<p>17.1 These Terms are governed by the laws of the Republic of China (Taiwan).</p>
+<p>17.2 For matters not resolved by arbitration under these Terms, the parties agree that the Taiwan Taipei District Court will be the court of first instance.</p>
+<hr />
+<h2>18. General Terms</h2>
+<h3>18.1 Entire Agreement</h3>
+<p>These Terms, together with the Privacy Policy, constitute the entire agreement between you and us regarding the Service and supersede any prior oral or written agreements.</p>
+<h3>18.2 Severability</h3>
+<p>If any provision of these Terms is found invalid or unenforceable, that provision will be adjusted or removed in a way that most closely reflects the original intent without affecting the validity of the remaining provisions.</p>
+<h3>18.3 No Waiver</h3>
+<p>Our failure or delay in exercising any right under these Terms does not constitute a waiver of that right.</p>
+<h3>18.4 Assignment</h3>
+<p>We may assign our rights and obligations under these Terms to an affiliate or successor in connection with a merger, acquisition, or asset sale without prior notice to you. You may not assign your rights or obligations under these Terms.</p>
+<hr />
+<h2>19. Changes to These Terms</h2>
+<p>19.1 We reserve the right to revise these Terms at any time.</p>
+<p>19.2 Revised Terms become effective when posted. We will notify you by:</p>
+<ul>
+  <li>updating the &quot;Last Updated&quot; date at the top of these Terms</li>
+  <li>providing in-app pop-up notice or announcement</li>
+</ul>
+<p>19.3 For material revisions, such as changes affecting your rights or obligations, we will notify you within a reasonable time before the revision takes effect.</p>
+<p>19.4 Your continued use of the Service after revised Terms become effective means you accept the revised Terms. If you do not agree, please stop using the Service.</p>
+<hr />
+<h2>20. Contact Us</h2>
+<p>If you have questions or comments about these Terms, please contact us:</p>
+<ul>
+  <li><strong>Company</strong>: CHENHSI TECHNOLOGY CO., LTD.</li>
+  <li><strong>Email</strong>: support@corefit-ai.com</li>
+  <li><strong>Official Website</strong>: <a href="https://www.corefit-ai.com">https://www.corefit-ai.com</a></li>
+</ul>
+<hr />
+<p>*These Terms were last updated on May 11, 2026.*</p>
+      </article>
+    </main>
+    <footer>© 2026 CoreFit. All Rights Reserved.</footer>
+  </div>
+  
+</body>
+</html>

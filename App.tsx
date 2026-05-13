@@ -29,7 +29,7 @@ const App: React.FC = () => {
         <Download content={currentContent} />
       </main>
 
-      <Footer content={currentContent} />
+      <Footer content={currentContent} lang={lang} />
       
     </div>
   );

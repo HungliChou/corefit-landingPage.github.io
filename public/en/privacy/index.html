@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoreFit Privacy Policy | CoreFit</title>
+  <meta name="description" content="CoreFit Privacy Policy covering data collection, use, third-party services, AI processing, and account deletion." />
+  <link rel="canonical" href="https://www.corefit-ai.com/en/privacy" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://www.corefit-ai.com/privacy" />
+  <link rel="alternate" hreflang="en" href="https://www.corefit-ai.com/en/privacy" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #121212;
+      --panel: #1a1a1a;
+      --line: rgba(255, 255, 255, 0.10);
+      --text: #f7f7f7;
+      --muted: #a8adb7;
+      --blue: #1a75ff;
+      --purple: #614fff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Noto Sans TC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: #8db8ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .shell { min-height: 100vh; }
+    header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(18, 18, 18, 0.86);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    .brand img { width: 34px; height: 34px; border-radius: 8px; }
+    .links { display: flex; gap: 18px; flex-wrap: wrap; justify-content: flex-end; align-items: center; }
+    .links a { color: var(--muted); font-size: 14px; font-weight: 600; }
+    .language-link {
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 6px;
+      padding: 6px 10px;
+      color: #fff !important;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 54px 22px 76px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      padding: 6px 10px;
+      border: 1px solid rgba(26, 117, 255, 0.32);
+      border-radius: 6px;
+      color: #9fc4ff;
+      background: rgba(26, 117, 255, 0.10);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    article {
+      background: rgba(26, 26, 26, 0.72);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 32px;
+    }
+    h1, h2, h3 {
+      line-height: 1.28;
+      letter-spacing: 0;
+      color: #fff;
+    }
+    h1 { font-size: clamp(30px, 5vw, 46px); margin: 0 0 18px; }
+    h2 { font-size: 24px; margin: 34px 0 12px; padding-top: 8px; }
+    h3 { font-size: 18px; margin: 26px 0 10px; }
+    p, li { color: #d8dbe2; font-size: 16px; }
+    p { margin: 0 0 16px; }
+    ul, ol { padding-left: 22px; margin: 0 0 18px; }
+    li { margin: 6px 0; }
+    strong { color: #fff; }
+    hr { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; margin: 16px 0 22px; }
+    table { width: 100%; border-collapse: collapse; min-width: 620px; }
+    th, td { border-bottom: 1px solid var(--line); padding: 12px 14px; text-align: left; vertical-align: top; }
+    th { background: rgba(255, 255, 255, 0.06); color: #fff; font-weight: 800; }
+    td { color: #d8dbe2; }
+    tr:last-child td { border-bottom: 0; }
+    .request-form { display: grid; gap: 18px; margin: 18px 0 24px; padding: 22px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255, 255, 255, 0.04); }
+    .field { display: grid; gap: 8px; }
+    label { color: #fff; font-weight: 700; line-height: 1.4; }
+    .hint { color: var(--muted); font-size: 14px; margin: 0; }
+    input, textarea { width: 100%; border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 8px; background: rgba(18, 18, 18, 0.86); color: var(--text); font: inherit; padding: 12px 14px; }
+    textarea { min-height: 118px; resize: vertical; }
+    input:focus, textarea:focus { border-color: rgba(141, 184, 255, 0.86); box-shadow: 0 0 0 3px rgba(26, 117, 255, 0.18); outline: none; }
+    .checkbox-field { display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: start; }
+    .checkbox-field input { width: 18px; height: 18px; margin-top: 4px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    button { border: 0; border-radius: 8px; cursor: pointer; font: inherit; font-weight: 800; padding: 12px 16px; }
+    .primary-button { background: var(--blue); color: white; }
+    .secondary-button { background: rgba(255, 255, 255, 0.10); color: white; border: 1px solid rgba(255, 255, 255, 0.14); }
+    .status-message { color: #9fc4ff; font-size: 14px; min-height: 22px; margin: 0; }
+    footer { border-top: 1px solid var(--line); color: var(--muted); text-align: center; padding: 28px 18px 34px; font-size: 14px; }
+    @media (max-width: 640px) {
+      .nav { align-items: flex-start; flex-direction: column; }
+      .links { justify-content: flex-start; }
+      main { padding-top: 34px; }
+      article { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <nav class="nav" aria-label="CoreFit legal navigation">
+        <a class="brand" href="/">
+          <img src="/logo.png" alt="" />
+          <span>CoreFit</span>
+        </a>
+        <div class="links">
+          <a href="/en/terms/">Terms</a>
+          <a href="/en/privacy/">Privacy Policy</a>
+          <a href="/en/delete-account/">Delete Account</a>
+          <a class="language-link" href="/privacy/">繁體中文</a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <span class="eyebrow">CoreFit Legal</span>
+      <article>
+<h1>CoreFit Privacy Policy</h1>
+<p><strong>Last Updated: May 11, 2026</strong> <strong>Effective Date: May 11, 2026</strong></p>
+<p>Welcome to CoreFit (the &quot;App&quot; or the &quot;Service&quot;). We value your privacy. This Privacy Policy explains how we collect, use, store, and protect your personal data. Please read this Policy carefully before using the Service.</p>
+<hr />
+<h2>1. About Us</h2>
+<p>The App is developed and operated by <strong>CHENHSI TECHNOLOGY CO., LTD.</strong> (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;).</p>
+<ul>
+  <li><strong>Contact Email</strong>: support@corefit-ai.com</li>
+  <li><strong>Official Website</strong>: <a href="https://www.corefit-ai.com">https://www.corefit-ai.com</a></li>
+</ul>
+<p>If you have questions about this Policy, please contact us through the methods above.</p>
+<hr />
+<h2>2. Scope</h2>
+<p>This Policy applies to our collection and processing of personal data when you download and use CoreFit through Apple App Store, Google Play, or other authorized channels. This Policy does not apply to the privacy practices of third-party websites or services, even if linked from the App.</p>
+<hr />
+<h2>3. Data We Collect</h2>
+<h3>3.1 Data You Provide</h3>
+<div class="table-wrap"><table><thead><tr><th>Category</th><th>Items</th><th>Collection Timing</th></tr></thead><tbody>
+<tr><td><strong>Account data</strong></td><td>Name, email address, password (stored encrypted)</td><td>When registering an account</td></tr>
+<tr><td><strong>Profile</strong></td><td>Username, profile photo, gender, birthday, location text input</td><td>When setting up your profile</td></tr>
+<tr><td><strong>User identification and settings</strong></td><td>User ID, language setting, privacy settings, account status, entitlement status</td><td>When creating an account and using the Service</td></tr>
+<tr><td><strong>Body data</strong></td><td>Height, weight, body fat percentage</td><td>When completing fitness questionnaires or editing your profile</td></tr>
+<tr><td><strong>Fitness information</strong></td><td>Fitness goals, experience level, preferred exercise types, training frequency, preferred training times, intensity, style, and location</td><td>When completing fitness questionnaires</td></tr>
+<tr><td><strong>Health information</strong></td><td>Physical conditions, existing injuries, special needs</td><td>When completing fitness questionnaires (optional)</td></tr>
+<tr><td><strong>Exercise records</strong></td><td>Heavy lift experience and personal records for squats, deadlifts, shoulder press, bench press, etc. (weight and reps)</td><td>When completing fitness questionnaires (optional)</td></tr>
+<tr><td><strong>Training data</strong></td><td>Exercises, sets, reps, weights, rest times, and notes for each workout</td><td>When using workout logging</td></tr>
+<tr><td><strong>Custom content</strong></td><td>Custom exercises (name, video link, description), custom training plans, workout templates</td><td>When using exercise library or plan features</td></tr>
+<tr><td><strong>Social data</strong></td><td>Friend relationships, student relationships, shared workout schedules and plans</td><td>When using social and coach features</td></tr>
+<tr><td><strong>Personal bio</strong></td><td>Personality description, interests, motto, languages, certificates, tags</td><td>When editing your profile (optional)</td></tr>
+</tbody></table></div>
+<h3>3.2 Data from Third-Party Sign-In</h3>
+<p>If you choose Google or Apple sign-in, we receive your profile name and email address. We <strong>do not</strong> receive your third-party account password.</p>
+<h3>3.3 Subscription and Payment Data</h3>
+<p>When you purchase subscriptions, points, or coach seat packs, transactions are processed by Apple App Store or Google Play Store. We <strong>do not</strong> directly collect your credit card number or other financial account information. Payment-related data obtained or processed through RevenueCat and platform transaction mechanisms includes anonymous or platform user identifiers, product IDs, transaction IDs, subscription status, plan type (Pro/Coach), subscription period, renewal status, trial status, purchase history, and point/seat entitlement status.</p>
+<h3>3.4 Data We Do Not Collect</h3>
+<p>For clarity, the App <strong>does not</strong> collect:</p>
+<ul>
+  <li>precise location (GPS) or coarse location data</li>
+  <li>advertising identifiers (IDFA, GAID)</li>
+  <li>contacts or phone numbers</li>
+  <li>SMS or call history</li>
+  <li>continuous camera or microphone access (only one-time photo library or camera access when you choose to upload a profile photo)</li>
+  <li>health platform data (HealthKit, Google Fit)</li>
+  <li>browsing history or usage data from other apps</li>
+  <li>we do not actively use cookies or similar technologies for cross-site tracking or advertising tracking</li>
+</ul>
+<p>Third-party services or platforms may process IP address, device information, system version, transaction identifiers, cookies, WebView storage data, or other necessary technical data for transaction verification, security, fraud prevention, abuse detection, video playback, or service maintenance under their own privacy policies.</p>
+<hr />
+<h2>4. How We Collect Data</h2>
+<ul>
+  <li><strong>Direct collection</strong>: when you register, set up a profile, complete fitness questionnaires, log workouts, create content, or use social features.</li>
+  <li><strong>Third-party sign-in</strong>: when you sign in through Google or Apple, data is provided under the corresponding OAuth process.</li>
+  <li><strong>Payment platforms</strong>: subscription and purchase information is transmitted through Apple/Google payment systems and RevenueCat.</li>
+</ul>
+<hr />
+<h2>5. How We Use Your Data</h2>
+<p>We use personal data only for the following purposes:</p>
+<div class="table-wrap"><table><thead><tr><th>Purpose</th><th>Description</th></tr></thead><tbody>
+<tr><td><strong>Core service delivery</strong></td><td>Create and manage your account, record training data, manage training plans and templates, and provide exercise library features</td></tr>
+<tr><td><strong>AI personalization</strong></td><td>Generate personalized training plans and weight suggestions through AI based on fitness goals, preferences, body data, and training history</td></tr>
+<tr><td><strong>Social and coach features</strong></td><td>Manage friend/student relationships, share training content, and send in-app notifications</td></tr>
+<tr><td><strong>Subscription and purchase management</strong></td><td>Verify subscription status, manage Pro/Coach access, process points, seat packs, refunds, or purchase restoration</td></tr>
+<tr><td><strong>Service improvement</strong></td><td>Understand feature usage to improve product experience (we currently do not use third-party analytics tools)</td></tr>
+<tr><td><strong>Customer support</strong></td><td>Respond to questions or requests</td></tr>
+<tr><td><strong>Legal compliance</strong></td><td>Comply with applicable laws and regulations</td></tr>
+</tbody></table></div>
+<p>Without your consent, we <strong>will not</strong> provide or share your personal data with third parties for advertising, marketing, or data analytics purposes. We also <strong>do not</strong> sell your personal data.</p>
+<hr />
+<h2>6. AI Features and Data Processing</h2>
+<p>The App&#39;s AI features, including AI training plan generation and smart weight suggestions, are technically supported by OpenAI. When you use AI features:</p>
+<h3>6.1 Data Sent to AI</h3>
+<p>We transmit requests and receive responses through the OpenAI Responses API using HTTPS/TLS encrypted connections. To generate personalized training suggestions, the following data may be sent to OpenAI&#39;s API:</p>
+<ul>
+  <li>your fitness goals and preferences</li>
+  <li>body data (height, weight, body fat percentage)</li>
+  <li>exercise experience level</li>
+  <li>training history (exercises, weights, reps, etc.)</li>
+  <li>text you enter in AI conversations</li>
+</ul>
+<h3>6.2 AI Data Processing Principles</h3>
+<ul>
+  <li>Data is transmitted over encrypted connections (HTTPS/TLS).</li>
+  <li>Under OpenAI commercial API terms, data submitted through the API <strong>is not</strong> used to train OpenAI models. We have not enabled any additional data sharing or model training options.</li>
+  <li>We do not send your email address or account password in AI requests.</li>
+  <li>OpenAI may retain API request and response data within the scope allowed by its policies for abuse monitoring, security, and service provision. According to OpenAI&#39;s current public explanation, the Responses API may store application state by default for about 30 days. Actual retention periods, controls, and exceptions depend on OpenAI&#39;s then-effective policies.</li>
+</ul>
+<hr />
+<h2>7. Third-Party Services</h2>
+<p>The App uses the following third-party services, which may process certain data under their own privacy policies:</p>
+<div class="table-wrap"><table><thead><tr><th>Provider</th><th>Purpose</th><th>Data That May Be Processed</th><th>Privacy Policy</th></tr></thead><tbody>
+<tr><td><strong>Appwrite Cloud</strong></td><td>Backend services (authentication, database, file storage)</td><td>Account data, profile, training data, profile images</td><td><a href="https://appwrite.io/policy/privacy">https://appwrite.io/policy/privacy</a></td></tr>
+<tr><td><strong>RevenueCat</strong></td><td>Subscription management and in-app purchase processing</td><td>Anonymous user ID, subscription status, purchase history (no credit card information)</td><td><a href="https://www.revenuecat.com/privacy">https://www.revenuecat.com/privacy</a></td></tr>
+<tr><td><strong>OpenAI</strong></td><td>AI training plan generation and smart weight suggestions</td><td>Fitness goals, body data, training history, conversation content</td><td><a href="https://openai.com/privacy">https://openai.com/privacy</a></td></tr>
+<tr><td><strong>Google OAuth</strong></td><td>Google sign-in</td><td>Google profile name, email</td><td><a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></td></tr>
+<tr><td><strong>Apple Sign-In</strong></td><td>Apple sign-in</td><td>Name and email provided by Apple (you may choose to hide email)</td><td><a href="https://www.apple.com/legal/privacy/">https://www.apple.com/legal/privacy/</a></td></tr>
+<tr><td><strong>Apple / Google payment systems</strong></td><td>Subscription and purchase transactions</td><td>Transaction information managed directly by the platforms</td><td>See each platform&#39;s privacy policy</td></tr>
+<tr><td><strong>YouTube</strong></td><td>Exercise demonstration videos and user custom video link playback</td><td>Technical data related to video playback under YouTube/Google policies</td><td><a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></td></tr>
+</tbody></table></div>
+<p>Without your consent, we <strong>will not</strong> provide or share your personal data with advertisers, data brokers, or other advertising-purpose third parties, and we do not sell your personal data.</p>
+<hr />
+<h2>8. Data Sharing and Disclosure</h2>
+<p>Except for the third-party services described above, we share personal data only in the following situations:</p>
+<ol>
+  <li><strong>With your consent</strong>: when you actively choose to share workout schedules or plans with friends/students.</li>
+  <li><strong>Social features</strong>: your username and profile photo may be visible to friends/students; other profile fields are visible according to your privacy settings.</li>
+  <li><strong>Legal requirements</strong>: when required by law, regulation, legal process, or government authority.</li>
+  <li><strong>Rights protection</strong>: when necessary to protect the rights, property, or safety of us, our users, or the public.</li>
+  <li><strong>Business transactions</strong>: if a merger, acquisition, or asset sale occurs, your data may be transferred with the business. We will notify you before transfer in such cases.</li>
+</ol>
+<p>We <strong>do not</strong> sell your personal data.</p>
+<hr />
+<h2>9. Data Storage and Protection</h2>
+<h3>9.1 Storage Location</h3>
+<ul>
+  <li><strong>Cloud storage</strong>: your account data, profile, workout records, and other User Content are stored on Appwrite Cloud servers. (<strong>Note</strong>: Appwrite Cloud servers may be located outside your country or region.)</li>
+  <li><strong>Local storage</strong>: to provide offline use, some data is cached on your device.</li>
+</ul>
+<h3>9.2 Security Measures</h3>
+<p>We use reasonable technical and organizational measures to protect personal data, including:</p>
+<ul>
+  <li>TLS/SSL encryption for network transmission</li>
+  <li>encrypted password storage, not plaintext</li>
+  <li>Appwrite access controls so users can access only their own data</li>
+  <li>privacy controls for profile fields so you can manage visibility</li>
+</ul>
+<p>However, no internet transmission or electronic storage method can be guaranteed 100% secure. We cannot guarantee absolute security, but we continuously work to protect your information.</p>
+<h3>9.3 Data Retention</h3>
+<ul>
+  <li>Account data and related content are retained while your account is active.</li>
+  <li>If you delete your account, we will delete or de-identify account-related personal data within <strong>30 days</strong>, unless continued retention is required by law or legitimate business purposes such as transaction records, refunds, taxes, dispute handling, fraud prevention, or security audits.</li>
+  <li>Subscription, one-time purchase, refund, point, and seat transaction records are handled according to Apple/Google/RevenueCat policies and our retention needs for transactions, entitlements, and disputes.</li>
+</ul>
+<hr />
+<h2>10. Your Rights</h2>
+<p>Under applicable laws, including Taiwan&#39;s Personal Data Protection Act, you have the following rights regarding your personal data:</p>
+<ol>
+  <li><strong>Inquiry and access</strong>: ask whether we hold your personal data and request access.</li>
+  <li><strong>Correction and supplementation</strong>: request correction or supplementation of inaccurate or incomplete data. You can also directly edit most profile data in the App.</li>
+  <li><strong>Deletion</strong>: request deletion of your personal data (see Section 11).</li>
+  <li><strong>Stop collection, processing, or use</strong>: request that we stop collecting, processing, or using your data in certain circumstances.</li>
+  <li><strong>Data portability</strong>: request data in a structured, machine-readable format where technically feasible.</li>
+</ol>
+<p>To exercise these rights, contact us using Section 15. We will respond within a reasonable period after receiving your request, not exceeding 30 days.</p>
+<hr />
+<h2>11. Account and Data Deletion</h2>
+<h3>11.1 How to Delete Your Account</h3>
+<p>You may request deletion of your CoreFit account through:</p>
+<ul>
+  <li><strong>In App</strong>: Me &gt; Settings &gt; Delete Account, then follow the prompts to complete verification and deletion.</li>
+  <li><strong>Email</strong>: send an account deletion request to support@corefit-ai.com.</li>
+</ul>
+<h3>11.2 What Happens After Account Deletion</h3>
+<p>After your account is deleted:</p>
+<ul>
+  <li>Your profile, workout records, custom exercises, training plans, workout templates, profile images, and similar data will be deleted or de-identified.</li>
+  <li>Your friend/student relationships, sharing data directly associated with your account, and in-app notification data will be deleted or disassociated.</li>
+  <li>Training content already shared with others may continue to exist as copies in their accounts.</li>
+  <li>Your subscription will not be cancelled automatically. <strong>Please cancel your subscription through Apple App Store or Google Play Store before deleting your account</strong>, otherwise charges may continue.</li>
+  <li>After account deletion, data will be removed from our servers within <strong>30 days</strong>.</li>
+  <li>Some data may be retained longer due to legal requirements or legitimate business needs, such as transaction records.</li>
+</ul>
+<hr />
+<h2>12. Minors&#39; Privacy</h2>
+<p>The App is content-rated <strong>4+</strong> on Apple App Store and Google Play, but the Service is not primarily targeted at children under 13.</p>
+<p><strong>Children under 13</strong>: we <strong>do not</strong> knowingly collect personal data from children under 13 without verifiable consent from a parent or legal guardian. If we become aware that we have collected such data, we will delete it as soon as practicable and close the account. If you are a parent or legal guardian and wish to consent to a child under 13 using the Service, please first contact us by email at support@corefit-ai.com for identity and consent verification.</p>
+<p><strong>Minors aged 13 or older but under the legal age of majority</strong>: their legal representative should read and agree to this Privacy Policy and the Terms of Service before they use the Service.</p>
+<p>If you are the legal representative of a minor user and wish to inquire, correct, stop use of, or delete that minor user&#39;s personal data, please contact us using Section 15.</p>
+<hr />
+<h2>13. Policy Updates</h2>
+<p>We may update this Privacy Policy from time to time. When material changes are made, we will:</p>
+<ol>
+  <li>Update the &quot;Last Updated&quot; date at the top of this Policy.</li>
+  <li>Notify you through in-app pop-up notices or announcements.</li>
+  <li>If changes involve expanded data collection scope or changed purposes, notify you within a reasonable time before the changes take effect and obtain your consent where necessary.</li>
+</ol>
+<p>We recommend reviewing this Policy periodically to understand how we protect your information.</p>
+<hr />
+<h2>14. Governing Law</h2>
+<p>This Privacy Policy is governed by the laws of the Republic of China (Taiwan).</p>
+<hr />
+<h2>15. Contact Us</h2>
+<p>If you have questions, comments, or requests about this Privacy Policy, please contact us:</p>
+<ul>
+  <li><strong>Company</strong>: CHENHSI TECHNOLOGY CO., LTD.</li>
+  <li><strong>Email</strong>: support@corefit-ai.com</li>
+  <li><strong>Official Website</strong>: <a href="https://www.corefit-ai.com">https://www.corefit-ai.com</a></li>
+</ul>
+<p>We will make reasonable efforts to respond within 30 days after receiving your contact.</p>
+<hr />
+<p>*This Privacy Policy was last updated on May 11, 2026.*</p>
+      </article>
+    </main>
+    <footer>© 2026 CoreFit. All Rights Reserved.</footer>
+  </div>
+  
+</body>
+</html>

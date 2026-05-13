@@ -1,13 +1,26 @@
 import React from 'react';
-import { ContentData } from '../types';
+import { ContentData, Language } from '../types';
 import { Mail, Twitter, Facebook, Instagram } from 'lucide-react';
 import CoreFitLogo from './CoreFitLogo';
 
 interface FooterProps {
   content: ContentData;
+  lang: Language;
 }
 
-const Footer: React.FC<FooterProps> = ({ content }) => {
+const Footer: React.FC<FooterProps> = ({ content, lang }) => {
+  const legalLinks = lang === 'en'
+    ? [
+        { href: '/en/terms/', label: 'Terms' },
+        { href: '/en/privacy/', label: 'Privacy Policy' },
+        { href: '/en/delete-account/', label: 'Delete Account' },
+      ]
+    : [
+        { href: '/terms/', label: '服務條款' },
+        { href: '/privacy/', label: '隱私權政策' },
+        { href: '/delete-account/', label: '刪除帳號' },
+      ];
+
   return (
     <footer className="bg-bg-dark pt-16 pb-8 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,9 +55,11 @@ const Footer: React.FC<FooterProps> = ({ content }) => {
         
         <div className="border-t border-white/5 pt-8 text-center text-text-muted text-sm">
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mb-4">
-            <a href="/terms/" className="hover:text-primary-blue transition-colors">服務條款</a>
-            <a href="/privacy/" className="hover:text-primary-blue transition-colors">隱私權政策</a>
-            <a href="/delete-account/" className="hover:text-primary-blue transition-colors">刪除帳號</a>
+            {legalLinks.map((link) => (
+              <a key={link.href} href={link.href} className="hover:text-primary-blue transition-colors">
+                {link.label}
+              </a>
+            ))}
           </div>
           <p>{content.footer.copyright}</p>
         </div>
