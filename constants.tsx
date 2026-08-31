@@ -97,7 +97,7 @@ export const CONTENT: Record<'en' | 'zh', ContentData> = {
       contact: "聯繫我們",
       business: "商務合作",
       social: "關注我們",
-      copyright: "© 2024 CoreFit. All Rights Reserved."
+      copyright: "© 2026 CoreFit. All Rights Reserved."
     }
   },
   en: {
@@ -196,7 +196,7 @@ export const CONTENT: Record<'en' | 'zh', ContentData> = {
       contact: "Contact Us",
       business: "Business",
       social: "Follow Us",
-      copyright: "© 2024 CoreFit. All Rights Reserved."
+      copyright: "© 2026 CoreFit. All Rights Reserved."
     }
   }
 };

@@ -26,7 +26,7 @@ const App: React.FC = () => {
         <Hero content={currentContent} />
         <Intro content={currentContent} />
         <Features content={currentContent} />
-        <Download content={currentContent} />
+        <Download content={currentContent} lang={lang} />
       </main>
 
       <Footer content={currentContent} lang={lang} />
