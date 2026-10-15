@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.corefit-ai.com/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.corefit-ai.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.corefit-ai.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.corefit-ai.com/en/"/>
+    <lastmod>2026-10-14</lastmod>
+  </url>
+  <url>
+    <loc>https://www.corefit-ai.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.corefit-ai.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.corefit-ai.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.corefit-ai.com/en/"/>
+    <lastmod>2026-10-14</lastmod>
+  </url>
+  <url>
+    <loc>https://www.corefit-ai.com/privacy/</loc>
+    <lastmod>2026-08-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.corefit-ai.com/terms/</loc>
+    <lastmod>2026-08-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.corefit-ai.com/delete-account/</loc>
+    <lastmod>2026-08-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.corefit-ai.com/en/privacy/</loc>
+    <lastmod>2026-08-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.corefit-ai.com/en/terms/</loc>
+    <lastmod>2026-08-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.corefit-ai.com/en/delete-account/</loc>
+    <lastmod>2026-08-24</lastmod>
+  </url>
+</urlset>

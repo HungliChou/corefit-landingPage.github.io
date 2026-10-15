@@ -1,19 +1,776 @@
-/* CoreFit Landing Page Styles */
+/* CoreFit Landing Page Styles
+ * 色彩 token 同步定義在 public/tw-config.js（Tailwind 類別）與這裡的 CSS 變數。全站只有深色。
+ * 注意：Tailwind CDN 的 <style> 會在執行時插在本檔之後，同權重時 Tailwind 會贏，
+ * 所以按鈕類別寫成 button.xxx / a.xxx 以提高權重，避免被 preflight 的 [type=button] 覆蓋。 */
+
+:root {
+  --bg: #070912;
+  --surface: #0e1220;
+  --surface-2: #151a2c;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  --text: #f4f6fb;
+  --text-2: #b4bbcc;
+  --text-3: #8a92a6;
+  --blue: #2f6bff;
+  --violet: #7c4dff;
+  --focus: #8fb0ff;
+  --chip: #c9d7ff;
+  --grad: linear-gradient(90deg, #2f6bff, #7c4dff);
+  --gutter: 16px;
+  --nav-h: 56px;
+  --sec-pad: 88px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  color-scheme: dark;
+}
+
+@media (min-width: 768px) {
+  :root { --gutter: 24px; --nav-h: 64px; --sec-pad: 120px; }
+}
+@media (min-width: 1280px) {
+  :root { --gutter: 32px; --sec-pad: 152px; }
+}
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
-    margin: 0;
-    font-family: 'Inter', 'Noto Sans TC', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  font-family: "Mona Sans", "Noto Sans TC", system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body.menu-open {
+  overflow: hidden;
 }
 
 #root {
-    width: 100%;
-    min-height: 100vh;
+  width: 100%;
+  min-height: 100vh;
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
+/* 導覽列錨點（#features、#how…）指到整個 section；扣掉 section 的上方留白，
+ * 讓區塊標題（eyebrow）停在導覽列正下方約 24px，而不是再往下空一大段。 */
+.section[id] { scroll-margin-top: calc(var(--nav-h) + 24px - var(--sec-pad)); }
+/* 「更多功能」緊接在功能區塊後面、上方沒有留白（pt-0），不扣 padding。 */
+#more.section { scroll-margin-top: calc(var(--nav-h) + 24px); }
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: rgba(47, 107, 255, 0.35);
+  color: #fff;
+}
+
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* ---------- Layout ---------- */
+
+.wrap {
+  width: 100%;
+  max-width: calc(1200px + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* overflow-x: clip 不會建立捲動容器，sticky 舞台照常運作；只是把光暈裁在區塊內，避免水平捲動。 */
+.section { padding-block: var(--sec-pad); overflow-x: clip; }
+
+.band { background: #0b0e1a; }
+
+/* ---------- Typography ---------- */
+
+.t-h1 {
+  font-size: clamp(2.375rem, 1.1rem + 5.2vw, 4.5rem);
+  text-wrap: balance;
+}
+.t-h2 {
+  font-size: clamp(1.75rem, 1rem + 2.6vw, 3rem);
+  text-wrap: balance;
+}
+.t-h3 {
+  font-size: clamp(1.375rem, 1.1rem + 1.2vw, 2rem);
+  text-wrap: balance;
+}
+
+:lang(zh) .t-h1 { font-weight: 900; line-height: 1.18; letter-spacing: 0.01em; text-wrap: wrap; }
+/* 主標固定兩行：中文每行（「課表跟著你成長，」約 8.1em）不拆開。
+ * 手機文字欄是整個視窗寬扣掉左右各 16px，字級上限設成「一行剛好放得下」，320px 也不會拆行或溢出。 */
+:lang(zh) .t-h1 > span { white-space: nowrap; }
+@media (max-width: 767px) {
+  :lang(zh) .t-h1 { font-size: min(clamp(2.375rem, 1.1rem + 5.2vw, 4.5rem), calc((100vw - 32px) / 8.3)); }
+}
+/* 768–1023：文字欄固定上限 420px（Hero.tsx 的 md:max-w-[420px]），字級上限設成 420px 放得下一行（約 50.6px），
+ * 820／834 這類 iPad 直式寬度才不會把「課表跟著你成長，」拆成兩行。 */
+@media (min-width: 768px) and (max-width: 1023px) {
+  :lang(zh) .t-h1 { font-size: min(clamp(2.75rem, 0.4rem + 5.6vw, 4.25rem), calc(420px / 8.3)); }
+}
+/* 1024–1279：文字欄是 12 欄中的 7 欄（約 556–700px），字級改用能放下約 8.6em 的尺寸 */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  :lang(zh) .t-h1 { font-size: clamp(2.75rem, 0.4rem + 5.6vw, 4.25rem); }
+}
+/* 中文首屏副標：第一句（約 29.2em）剛好一行，第二句從「今天該練什麼」開始，不在並列句中間斷開。 */
+:lang(zh) #top .copy { max-width: 30em; }
+/* 英文主標：第二句「So is your plan.」（約 7.0em）永遠單獨一行、不拆開；
+ * 第一句放不下時以 balance 拆成「Stronger / every week.」，所以任何寬度都是 2–3 行、不會留下孤字。 */
+:lang(en) .t-h1 { font-weight: 800; line-height: 1.05; letter-spacing: -0.025em; }
+:lang(en) .t-h1 > span:first-child { text-wrap: balance; }
+:lang(en) .t-h1 > span:last-child { white-space: nowrap; }
+@media (max-width: 767px) {
+  :lang(en) .t-h1 { font-size: min(clamp(2.375rem, 1.1rem + 5.2vw, 4.5rem), calc((100vw - 32px) / 7.3)); }
+}
+/* 768–1023：英文文字欄只有約 420px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  :lang(en) .t-h1 { font-size: clamp(2.75rem, 1rem + 4.2vw, 3.5rem); }
+}
+/* ≥1280：文字欄固定約 687px，第一句「Stronger every week.」約 9.91em；4.25rem（68px）時約 674px，放得下一行，
+ * 桌機因此跟中文一樣是兩行，不會留下「Stronger」單獨一行。字型載入失敗時退回 balance 的三行，不會溢出。 */
+@media (min-width: 1280px) {
+  :lang(en) .t-h1 { font-size: 4.25rem; }
+}
+:lang(zh) .t-h2 { font-weight: 900; line-height: 1.25; }
+:lang(en) .t-h2 { font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
+:lang(zh) .t-h3 { font-weight: 900; line-height: 1.3; }
+:lang(en) .t-h3 { font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; }
+
+/* 小型標題（卡片、方案、步驟） */
+.t-h4 { font-size: 18px; line-height: 1.35; }
+:lang(zh) .t-h4 { font-weight: 900; }
+:lang(en) .t-h4 { font-weight: 700; letter-spacing: -0.005em; }
+
+.eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--focus);
+}
+:lang(zh) .eyebrow { letter-spacing: 0.08em; }
+:lang(en) .eyebrow { letter-spacing: 0.12em; text-transform: uppercase; }
+.eyebrow { text-wrap: balance; }
+
+.copy {
+  font-size: 16px;
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+@media (min-width: 1024px) { .copy { font-size: 18px; } }
+:lang(zh) .copy { line-height: 1.75; max-width: 34em; }
+:lang(en) .copy { line-height: 1.6; max-width: 40ch; }
+.copy.copy-wide { max-width: 40em; }
+:lang(en) .copy.copy-wide { max-width: 56ch; }
+.copy.copy-free { max-width: none; }
+
+.fine {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-3);
+}
+
+.text-grad {
+  background: linear-gradient(90deg, #6e97ff, #a68bff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  /* 讓斜體／下沿不被裁切 */
+  padding-bottom: 0.04em;
+}
+@media (forced-colors: active) {
+  .text-grad {
+    background: none;
+    color: CanvasText;
+    -webkit-text-fill-color: CanvasText;
+  }
+}
+
+.link-inline {
+  white-space: nowrap;
+  color: var(--focus);
+  text-decoration: underline;
+  text-decoration-color: rgba(143, 176, 255, 0.45);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.link-inline:hover { text-decoration-color: currentColor; }
+
+.link-quiet {
+  color: var(--text-2);
+}
+.link-quiet:hover { color: var(--text); }
+
+/* ---------- Buttons ---------- */
+
+a.btn,
+button.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 24px;
+  border-radius: 9999px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+a.btn-sm { height: 40px; padding: 0 18px; font-size: 14px; }
+
+a.btn-primary,
+button.btn-primary {
+  background: var(--grad);
+  color: #fff;
+  box-shadow: 0 10px 30px -12px rgba(47, 107, 255, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+a.btn-secondary,
+button.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a.btn, button.btn { transition: filter 150ms var(--ease), transform 150ms var(--ease), background-color 150ms var(--ease); }
+  a.btn:active, button.btn:active { transform: scale(0.98); }
+}
+a.btn-primary:hover, button.btn-primary:hover { filter: brightness(1.08); }
+a.btn-secondary:hover, button.btn-secondary:hover { background: var(--surface-2); }
+
+/* 44×44 圓形控制鈕（影片暫停／播放） */
+button.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+  cursor: pointer;
+}
+button.icon-btn:hover { background: var(--surface-2); }
+
+/* ---------- Status note & badges ---------- */
+
+/* 上架狀態：說明文字，不是按鈕（沒有外框與底色） */
+.status-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-3);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.status-note__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--focus);
+  box-shadow: 0 0 0 3px rgba(143, 176, 255, 0.18);
+  flex: none;
+}
+
+.plan-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.plan-badge--free { color: var(--text-2); background: var(--surface-2); }
+.plan-badge--points { color: #9db3ff; background: transparent; box-shadow: inset 0 0 0 1px rgba(47, 107, 255, 0.5); }
+.plan-badge--pro { color: #fff; background: var(--grad); }
+.plan-badge--coach { color: #fff; background: #614fff; }
+
+/* ---------- Surfaces ---------- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+}
+
+.grad-frame {
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(47, 107, 255, 0.9), rgba(124, 77, 255, 0.9));
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--grad);
+  flex: none;
+}
+
+/* ---------- Screenshot card ---------- */
+
+.shot-card {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #f2f3f8;
+  aspect-ratio: 660 / 1434;
+  box-shadow: 0 30px 80px -24px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+@media (min-width: 1024px) { .shot-card { border-radius: 28px; } }
+.shot-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shot-glow {
+  position: absolute;
+  inset: 8% -18%;
+  border-radius: 9999px;
+  filter: blur(70px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* Story：桌機 sticky 舞台 */
+.story-stage {
+  --h: min(76vh, 720px);
+  position: sticky;
+  top: calc(50vh - var(--h) / 2);
+  height: var(--h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.story-stage__frame {
+  position: relative;
+  width: min(calc(var(--h) * 0.46), 330px);
+}
+.story-stage__glow {
+  position: absolute;
+  inset: 4% -22%;
+  border-radius: 9999px;
+  filter: blur(70px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+.story-stage__img {
+  position: absolute;
+  inset: 0;
+  object-position: top;
+  opacity: 0;
+  transform: scale(0.98);
+}
+.story-stage__img.is-active {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .story-stage__glow { transition: background-color 400ms var(--ease); }
+  .story-stage__img { transition: opacity 400ms var(--ease), transform 400ms var(--ease); }
+  .story-stage__card { transition: aspect-ratio 400ms var(--ease); }
+  .story-chapter { transition: opacity 300ms var(--ease); }
+  /* 非目前章節只稍微調暗：0.72 時最淡的內文（#b4bbcc）對底色仍有 5.7:1、eyebrow（#8fb0ff）5.2:1，符合 4.5:1。 */
+  .story-chapter.is-dim { opacity: 0.72; }
+}
+
+/* ---------- Video card ---------- */
+
+.video-card {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #0b0f1e;
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 50px 120px -30px rgba(47, 107, 255, 0.45), 0 30px 60px -20px rgba(0, 0, 0, 0.7);
+  isolation: isolate;
+}
+.video-card--film {
+  box-shadow: 0 40px 100px -30px rgba(124, 77, 255, 0.4);
+}
+.video-card > img,
+.video-card > video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: none;
+}
+.video-card > video.is-hidden { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .video-card > video.fade { transition: opacity 300ms var(--ease); }
+}
+
+.video-glow {
+  position: absolute;
+  inset: -15%;
+  border-radius: 9999px;
+  background: radial-gradient(#2f6bff55, #7c4dff33, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+button.video-center-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  z-index: 2;
+}
+
+button.film-cover {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(7, 9, 18, 0) 55%, rgba(7, 9, 18, 0.35) 100%);
+  cursor: pointer;
+  z-index: 2;
+  border-radius: inherit;
+}
+button.film-cover:focus-visible { outline-offset: -4px; }
+.film-cover__disc {
+  width: 72px;
+  height: 72px;
+  border-radius: 9999px;
+  background: var(--grad);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 16px 40px -10px rgba(47, 107, 255, 0.75), 0 0 0 8px rgba(255, 255, 255, 0.14);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .film-cover__disc { transition: transform 150ms var(--ease); }
+  button.film-cover:hover .film-cover__disc { transform: scale(1.06); }
+}
+
+/* ---------- Hero glow ---------- */
+
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 50% at 72% 32%, rgba(47, 107, 255, 0.28), transparent 70%),
+    radial-gradient(45% 40% at 88% 72%, rgba(124, 77, 255, 0.22), transparent 70%);
+  /* 光暈一律在 section 內淡出：下一個區塊是純底色，光暈若碰到邊界會留下一條水平硬切線。 */
+  -webkit-mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+}
+@media (max-width: 1023px) {
+  .hero-glow {
+    background:
+      radial-gradient(80% 40% at 50% 70%, rgba(47, 107, 255, 0.26), transparent 70%),
+      radial-gradient(60% 30% at 70% 88%, rgba(124, 77, 255, 0.2), transparent 70%);
+    /* 光暈中心靠近底部，半徑會超出 section；在邊界前淡出，避免下緣出現一條硬切線 */
+    -webkit-mask-image: linear-gradient(to bottom, #000 65%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 65%, transparent 100%);
+  }
+}
+
+.hero-layout { position: relative; }
+@media (min-width: 1024px) {
+  .hero-layout {
+    min-height: min(calc(100svh - 64px), 920px);
+    display: flex;
+    align-items: center;
+  }
+}
+
+.hero-video { width: min(72vw, 280px); }
+@media (min-width: 768px) { .hero-video { width: 260px; } }
+/* 桌機：寬度同時受視窗高度限制（扣掉 64px 導覽列與約 150px 的控制鈕／留白），
+ * 1280×720 這類矮筆電上卡片才不會頂到畫面底。不支援 svh 的瀏覽器沿用前一條。 */
+@media (min-width: 1024px) {
+  .hero-video { width: 300px; width: max(220px, min(300px, calc((100svh - 214px) * 9 / 16))); }
+}
+@media (min-width: 1280px) {
+  .hero-video { width: 340px; width: max(220px, min(340px, calc((100svh - 214px) * 9 / 16))); }
+}
+@media (min-width: 1024px) and (max-height: 760px) {
+  .wrap.hero-layout { padding-block: 24px; }
+}
+
+.film-video { width: min(80vw, 320px); }
+/* 桌機：從導覽列「影片」跳過來時，整張影片卡要完整落在視窗內。
+ * 錨點停在導覽列（64px）正下方，區塊上方留白縮成 56px，卡片高度扣掉上方 120px 與下方 48px。
+ * 1024×768 → 600px、1280×720 → 552px、1440×900 → 720px（上限）。不支援 svh 的瀏覽器沿用 vh。 */
+@media (min-width: 1024px) {
+  #film { scroll-margin-top: 64px; }
+  #film.section { padding-top: 56px; }
+  .film-video {
+    height: min(calc(100vh - 168px), 720px);
+    height: max(420px, min(calc(100svh - 168px), 720px));
+    width: auto;
+    aspect-ratio: 9 / 16;
+  }
+}
+
+/* 上一個區塊是「運作方式」的 .band（#0b0e1a），漸層從同一個顏色開始，接縫才不會出現一條暗線；
+ * 結尾回到頁面底色，接下一個「方案」區塊。 */
+.film-bg { background: linear-gradient(180deg, #0b0e1a 0%, #121a44 50%, #070912 100%); }
+
+/* ---------- Navbar ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid transparent;
+}
+.site-header.is-scrolled,
+.site-header.is-open {
+  background: rgba(7, 9, 18, 0.72);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-bottom-color: var(--line);
+}
+/* 選單展開時改由下拉面板負責 blur：父層若也有 backdrop-filter，Chrome 會讓子層面板的 blur／底色失效而透出底下內容。 */
+.site-header.is-open {
+  background: rgba(7, 9, 18, 0.96);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .site-header { transition: background-color 150ms linear, border-color 150ms linear; }
+}
+
+.mobile-nav {
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background: rgba(7, 9, 18, 0.96);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+  max-height: calc(100svh - 56px);
+  overflow-y: auto;
+}
+.mobile-scrim {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 56px;
+  bottom: 0;
+  background: rgba(7, 9, 18, 0.7);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 100;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-weight: 600;
+  transform: translateY(-200%);
+}
+.skip-link:focus,
+.skip-link:focus-visible { transform: none; }
+
+/* ---------- FAQ ---------- */
+
+.faq-item > summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 56px;
+  padding-block: 18px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.45;
+  cursor: pointer;
+}
+.faq-item > summary::-webkit-details-marker { display: none; }
+.faq-item > summary > span { text-wrap: pretty; }
+.faq-item > summary:hover { color: #fff; }
+.faq-chevron { flex: none; color: var(--text-3); }
+@media (prefers-reduced-motion: no-preference) {
+  .faq-chevron { transition: transform 200ms var(--ease); }
+}
+.faq-item[open] .faq-chevron { transform: rotate(180deg); }
+@media (prefers-reduced-motion: reduce) {
+  .faq-item[open] .faq-chevron { transform: none; }
+}
+.faq-answer {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--text-2);
+  padding-bottom: 22px;
+  padding-right: 36px;
+}
+
+/* ---------- MoreFeatures list ---------- */
+
+.more-item { display: flex; gap: 14px; padding-block: 22px; border-top: 1px solid var(--line); }
+.more-item__icon { flex: none; margin-top: 3px; color: var(--focus); }
+
+.icon-tile {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(47, 107, 255, 0.14);
+  color: var(--focus);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- HowItWorks ---------- */
+
+.step-num {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  padding: 1px;
+  background: var(--grad);
+  flex: none;
+}
+.step-num > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: #0b0e1a;
+  font-family: "Mona Sans", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--text);
+}
+.step-line {
+  position: absolute;
+  background: var(--line-strong);
+  pointer-events: none;
+}
+
+/* ---------- Film ---------- */
+
+.film-closing { font-size: 24px; line-height: 1.35; display: inline-block; }
+:lang(zh) .film-closing { font-weight: 900; letter-spacing: 0.02em; }
+:lang(en) .film-closing { font-weight: 800; letter-spacing: -0.01em; }
+
+/* ---------- Plans / CTA ---------- */
+
+.t-plan { font-size: 24px; line-height: 1.25; }
+:lang(zh) .t-plan { font-weight: 900; }
+:lang(en) .t-plan { font-weight: 800; letter-spacing: -0.015em; }
+
+/* 320–374 的英文結尾標題：卡片內只剩約 246px，28px 時「what to train today.」放不下，會拆成三行（Stop guessing / what to / train today.）。 */
+@media (max-width: 374px) {
+  :lang(en) #download-title { font-size: 26px; }
+}
+
+.cta-glow {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: min(720px, 120%);
+  aspect-ratio: 1.6;
+  transform: translate(-50%, -50%);
+  background:
+    radial-gradient(50% 50% at 40% 50%, rgba(47, 107, 255, 0.22), transparent 70%),
+    radial-gradient(50% 50% at 62% 55%, rgba(124, 77, 255, 0.18), transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+/* Story 重點清單和英文內文同寬，避免右緣參差 */
+:lang(en) .bullets { max-width: 28rem; }
+.bullets li > span:last-child,
+.plan-items li > span { text-wrap: pretty; }
+/* CjkText：只在詞與詞之間（<wbr>）、標點後與空白處換行。break-word 是安全網：
+ * 單一詞組比整行還寬時才允許從中間斷開，避免水平溢出。 */
+.cjk-kw { word-break: keep-all; overflow-wrap: break-word; }
+
+/* 英文段落避免最後一行只剩一個字（中文由 CjkText 的句尾黏合處理）。
+ * 置中的小字說明（.balance-en）用 balance，讓兩行長度接近；靠左的內文用 pretty。 */
+:lang(en) .faq-answer,
+:lang(en) .more-item p,
+:lang(en) #how li p { text-wrap: pretty; }
+:lang(en) .balance-en { text-wrap: balance; }
+
+/* 中文不用 pretty：Chrome 會把每個漢字當成一個「字」來平衡，和 CjkText 的句尾黏合疊加後，
+ * 反而把兩字詞（決定、喜歡、訓練）拆到兩行。中文句尾孤字已由 CjkText 處理。 */
+:lang(zh) .copy,
+:lang(zh) .bullets li > span:last-child,
+:lang(zh) .plan-items li > span,
+:lang(zh) .faq-item > summary > span { text-wrap: wrap; }
+
+/* 推薦方案：稍微浮起的底色＋頂部光暈 */
+.plan-card--highlight {
+  background:
+    radial-gradient(80% 60% at 50% 0%, rgba(47, 107, 255, 0.16), transparent 70%),
+    var(--surface-2);
+}
+.plan-label {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  background: var(--grad);
+  white-space: nowrap;
+}
+:lang(zh) .copy.film-copy { max-width: 26em; }

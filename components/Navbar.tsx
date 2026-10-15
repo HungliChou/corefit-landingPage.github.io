@@ -1,123 +1,163 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Globe } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ContentData, Language } from '../types';
+import React, { useEffect, useRef, useState } from 'react';
+import { Menu, X } from 'lucide-react';
+import { APP_STORE_URL, IS_LIVE } from '../config';
+import type { ContentData } from '../types';
 import CoreFitLogo from './CoreFitLogo';
 
 interface NavbarProps {
   content: ContentData;
-  lang: Language;
-  setLang: (lang: Language) => void;
+  menuOpen: boolean;
+  setMenuOpen: (open: boolean) => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ content, lang, setLang }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+/** 語言切換是整頁導覽，並保留目前的錨點（例如 /en/#plans → /#plans）。 */
+function switchLanguage(e: React.MouseEvent<HTMLAnchorElement>) {
+  if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+  e.preventDefault();
+  const href = e.currentTarget.getAttribute('href') ?? '/';
+  window.location.assign(href + window.location.hash);
+}
+
+const Navbar: React.FC<NavbarProps> = ({ content, menuOpen, setMenuOpen }) => {
+  const { a11y, nav, status, brand } = content;
+  const [scrolled, setScrolled] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const toggleLang = () => {
-    setLang(lang === 'zh' ? 'en' : 'zh');
-  };
+  // 選單展開：鎖住背景捲動、Esc 關閉並把 focus 還給漢堡鈕
+  useEffect(() => {
+    if (!menuOpen) return;
+    document.body.classList.add('menu-open');
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMenuOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.body.classList.remove('menu-open');
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [menuOpen, setMenuOpen]);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
+  // 視窗放大到桌機寬度時自動收起手機選單
+  useEffect(() => {
+    if (!menuOpen) return;
+    let mql: MediaQueryList;
+    try {
+      mql = window.matchMedia('(min-width: 768px)');
+    } catch {
+      return;
     }
-  };
+    const onChange = () => mql.matches && setMenuOpen(false);
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, [menuOpen, setMenuOpen]);
+
+  const langLink = (className: string) => (
+    <a
+      href={a11y.langHref}
+      hrefLang={a11y.langCode}
+      lang={a11y.langCode}
+      aria-label={a11y.langLabel}
+      onClick={switchLanguage}
+      className={className}
+    >
+      {a11y.langSwitch}
+    </a>
+  );
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || isMobileMenuOpen ? 'bg-bg-dark/90 backdrop-blur-md border-b border-white/10' : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <div className="flex-shrink-0 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <div className="flex items-center gap-2">
-              <CoreFitLogo className="w-10 h-10" />
-              <span className="text-2xl font-heading font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
-                CoreFit
-              </span>
-            </div>
-          </div>
+    <header className={`site-header ${scrolled ? 'is-scrolled' : ''} ${menuOpen ? 'is-open' : ''}`}>
+      <nav aria-label={a11y.navLabel} className="wrap flex h-14 items-center justify-between gap-4 md:h-16">
+        {/* 選單展開時點 logo 也要收起選單（和選單內的連結一致），否則捲到 #top 後 <main> 仍是 inert。 */}
+        <a
+          href="#top"
+          aria-label={a11y.home}
+          onClick={() => setMenuOpen(false)}
+          className="-ml-1 flex items-center gap-2.5 rounded-lg px-1 py-1"
+        >
+          <CoreFitLogo size={28} className="h-7 w-7" />
+          <span className="text-[20px] font-extrabold tracking-[-0.01em] text-ink" style={{ fontFamily: '"Mona Sans", system-ui, sans-serif' }}>
+            {brand}
+          </span>
+        </a>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:block">
-            <div className="flex items-center space-x-8">
-              <button onClick={() => scrollToSection('features')} className="text-text-secondary hover:text-primary-blue transition-colors font-medium">
-                {content.nav.features}
-              </button>
-              
-              <div className="h-6 w-px bg-white/20 mx-2"></div>
-
-              <button 
-                onClick={toggleLang} 
-                className="flex items-center gap-1 text-text-muted hover:text-white transition-colors text-sm"
-              >
-                <Globe className="w-4 h-4" />
-                {content.nav.langSwitch}
-              </button>
-
-              <button 
-                onClick={() => scrollToSection('download')}
-                className="bg-gradient-to-r from-primary-blue to-primary-purple hover:shadow-[0_0_20px_rgba(97,79,255,0.5)] text-white px-6 py-2 rounded-lg font-bold transition-all transform hover:-translate-y-0.5"
-              >
-                {content.nav.download}
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-white p-2"
-            >
-              {isMobileMenuOpen ? <X /> : <Menu />}
-            </button>
-          </div>
+        {/* ≥768：橫排連結 */}
+        <div className="hidden items-center gap-7 md:flex">
+          <ul className="flex items-center gap-7">
+            {nav.map((item) => (
+              <li key={item.href}>
+                <a href={item.href} className="text-[15px] font-medium text-ink-2 transition-colors hover:text-ink">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <span className="h-5 w-px bg-line-strong" aria-hidden="true" />
+          {langLink(
+            'inline-flex h-9 items-center rounded-full border border-line-strong px-3.5 text-[13px] font-semibold text-ink-2 transition-colors hover:bg-surface-2 hover:text-ink'
+          )}
+          {IS_LIVE && (
+            <a href={APP_STORE_URL} target="_blank" rel="noopener" className="btn btn-primary btn-sm">
+              {status.navDownload}
+            </a>
+          )}
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-bg-card border-t border-white/10"
+        {/* <768：語言切換 + 漢堡鈕 */}
+        <div className="flex items-center gap-1 md:hidden">
+          {langLink(
+            'inline-flex h-11 min-w-[44px] items-center justify-center rounded-full px-3 text-[14px] font-semibold text-ink-2'
+          )}
+          <button
+            ref={toggleRef}
+            type="button"
+            className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-ink"
+            aria-label={menuOpen ? a11y.menuClose : a11y.menuOpen}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            onClick={() => setMenuOpen(!menuOpen)}
           >
-            <div className="px-4 pt-2 pb-6 space-y-1">
-              <button onClick={() => scrollToSection('features')} className="block w-full text-left px-3 py-3 text-text-secondary hover:bg-white/5 rounded-md">
-                {content.nav.features}
-              </button>
-               <button onClick={toggleLang} className="block w-full text-left px-3 py-3 text-text-muted hover:bg-white/5 rounded-md flex items-center gap-2">
-                 <Globe className="w-4 h-4" />
-                {content.nav.langSwitch}
-              </button>
-              <button 
-                 onClick={() => scrollToSection('download')}
-                 className="block w-full text-center mt-4 bg-primary-blue text-white px-3 py-3 rounded-lg font-bold"
-              >
-                {content.nav.download}
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+            {menuOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
+          </button>
+        </div>
+
+        {/* 手機選單面板放在同一個 <nav> 地標內；定位相對於 header（nav 本身沒有 position）。 */}
+        <div id="mobile-nav" className="mobile-nav md:hidden" hidden={!menuOpen}>
+          <ul className="wrap py-2">
+            {nav.map((item) => (
+              <li key={item.href} className="border-b border-line last:border-b-0">
+                <a
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="flex h-[52px] items-center text-[17px] font-semibold text-ink"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+            {IS_LIVE && (
+              <li className="pb-3 pt-4">
+                <a href={APP_STORE_URL} target="_blank" rel="noopener" className="btn btn-primary w-full">
+                  {status.navDownload}
+                </a>
+              </li>
+            )}
+          </ul>
+        </div>
+      </nav>
+
+      {/* 選單展開時蓋住底下（已 inert）的頁面：調暗＋模糊，點一下就關閉選單。 */}
+      {menuOpen && <div className="mobile-scrim md:hidden" aria-hidden="true" onClick={() => setMenuOpen(false)} />}
+    </header>
   );
 };
 

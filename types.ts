@@ -1,72 +1,117 @@
-import { LucideIcon } from "lucide-react";
+import type { LucideIcon } from 'lucide-react';
 
-export type Language = 'en' | 'zh';
+export type Lang = 'zh' | 'en';
 
-export interface SectionContent {
-  title: string;
-  subtitle?: string;
-  description?: string;
+export type PlanTag = 'free' | 'points' | 'pro' | 'coach';
+
+export interface InlineLink {
+  /** 必須是所屬段落文字裡的一段原文；元件會把它包成 <a>。 */
+  text: string;
+  href: string;
 }
 
-export interface FeatureItem {
-  iconName: string;
+export interface Chapter {
+  shot: '01' | '02' | '03' | '04' | '05' | '06' | '08' | '09';
+  eyebrow: string;
   title: string;
-  description: string;
+  body: string;
+  bullets: string[];
+  tags: PlanTag[];
+  alt: string;
+}
+
+export interface MoreItem {
+  icon: LucideIcon;
+  title: string;
+  body: string;
+  tag?: PlanTag;
+  link?: InlineLink;
+}
+
+export interface Step {
+  title: string;
+  body: string;
+}
+
+export interface Plan {
+  name: string;
+  lead: string;
+  items: string[];
+  highlight?: boolean;
+}
+
+export interface FaqItem {
+  q: string;
+  a: string;
+  link?: InlineLink;
+}
+
+export interface TextPart {
+  text: string;
+  /** 外語片段的 BCP 47 語言碼，例如中文頁裡的 "en"。 */
+  lang?: string;
 }
 
 export interface ContentData {
-  nav: {
-    features: string;
-    download: string;
+  brand: string;
+  a11y: {
+    skip: string;
+    navLabel: string;
+    home: string;
+    menuOpen: string;
+    menuClose: string;
+    /** 語言切換連結上顯示的文字（EN／中文）。 */
     langSwitch: string;
+    langHref: string;
+    /** 語言切換連結的 aria-label（須包含 langSwitch 的可見文字，WCAG 2.5.3）。 */
+    langLabel: string;
+    /** 切換目標語言的語言碼（hreflang 與 lang）。 */
+    langCode: string;
+    pause: string;
+    play: string;
+    heroVideoDesc: string;
+    filmPlay: string;
+    filmVideoLabel: string;
   };
+  tags: Record<PlanTag, string>;
+  status: { comingSoon: string; badgeAlt: string; badgeSrc: string; navDownload: string };
+  nav: { href: string; label: string }[];
   hero: {
-    slogan: string;
-    headline: string;
-    description: string;
-    ctaPrimary: string;
-    ctaSecondary: string;
-    stats: string;
+    eyebrow: string;
+    h1a: string;
+    h1b: string;
+    sub: string;
+    cta: string;
+    /** 首屏說明列：每個 item 是不換行的一組；只在 item 之間（分隔符號後）換行。 */
+    meta: { sep: string; gap: string; items: TextPart[][] };
   };
-  intro: {
+  features: { eyebrow: string; title: string; sub: string; chapters: Chapter[]; disclosure: string };
+  more: { eyebrow: string; title: string; items: MoreItem[] };
+  how: { eyebrow: string; title: string; steps: Step[]; note: string };
+  film: { eyebrow: string; title: string; body: string; closing: string; disclosure: string };
+  plans: {
+    eyebrow: string;
     title: string;
-    description: string;
-    badges: string[];
+    plans: Plan[];
+    /** 推薦方案（highlight）上的小標籤。 */
+    recommended: string;
+    pointsTitle: string;
+    pointsBody: string;
+    fine: string;
   };
-  features: {
-    title: string;
-    subtitle: string;
-    categories: {
-      ai: { title: string; items: FeatureItem[] };
-      resources: { title: string; items: FeatureItem[] };
-      management: { title: string; items: FeatureItem[] };
-      tracking: { title: string; items: FeatureItem[] };
-      social: { title: string; items: FeatureItem[] };
-      coach: { title: string; items: FeatureItem[] };
-    };
-  };
-  advantages: {
-    title: string;
-    items: {
-      title: string;
-      description: string;
-    }[];
-  };
-  screenshots: {
-    title: string;
-    subtitle: string;
-    captions: string[];
-  };
-  download: {
-    title: string;
-    subtitle: string;
-    apple: string;
-    google: string;
-  };
+  faq: { title: string; firstPre: FaqItem; firstLive: FaqItem; items: FaqItem[]; more: string; email: string };
+  download: { title: string; subPre: string; subLive: string; secondary: string };
   footer: {
+    tagline: string;
     contact: string;
-    business: string;
-    social: string;
+    support: string;
+    partner: string;
+    supportEmail: string;
+    partnerEmail: string;
+    legal: string;
+    links: { label: string; href: string }[];
+    follow: string;
+    trademark: string;
     copyright: string;
   };
 }

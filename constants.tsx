@@ -1,202 +1,665 @@
-import { ContentData } from './types';
+import { Bell, BookOpen, ClipboardList, Languages, ShieldCheck, Sparkles } from 'lucide-react';
+import type { ContentData, Lang } from './types';
+import appStoreBadgeEn from './app-store-badge-en.svg';
+import appStoreBadgeZhTw from './app-store-badge-zh-tw.svg';
 
-export const CONTENT: Record<'en' | 'zh', ContentData> = {
+// 官網所有文案（含 aria-label 與 alt）都集中在這裡，元件內不寫死任何文字。
+// 文案規則：不寫價格與試用天數、不放用戶數／評分／推薦語、不用數據型口號。
+export const CONTENT: Record<Lang, ContentData> = {
   zh: {
-    nav: {
-      features: "功能特點",
-      download: "立即下載",
-      langSwitch: "English",
+    brand: 'CoreFit',
+    a11y: {
+      skip: '跳到主要內容',
+      navLabel: '主選單',
+      home: 'CoreFit 首頁',
+      menuOpen: '開啟選單',
+      menuClose: '關閉選單',
+      langSwitch: 'EN',
+      langHref: '/en/',
+      langLabel: 'EN – Switch to English',
+      langCode: 'en',
+      pause: '暫停影片',
+      play: '播放影片',
+      heroVideoDesc:
+        '靜音循環播放的 CoreFit 介紹影片，約 27 秒：開頭是標語「訓練可以很聰明」，接著是 App 畫面：AI 教練的 12 週週期化計畫與每週回顧、智能填重一鍵套用、一鍵完成每組、個人紀錄走勢，以及官方計畫、隨時微調、肌肉疲勞度與動作示範，最後以 CoreFit 標誌收尾。',
+      filmPlay: '播放 CoreFit 介紹影片（有聲）',
+      filmVideoLabel: 'CoreFit 介紹影片',
     },
+    tags: { free: '免費', points: 'CorePoints', pro: 'Pro', coach: '教練版' },
+    status: {
+      comingSoon: '即將登上 App Store',
+      badgeAlt: '在 App Store 下載',
+      badgeSrc: appStoreBadgeZhTw,
+      navDownload: '免費下載',
+    },
+    nav: [
+      { href: '#features', label: '功能' },
+      { href: '#how', label: '運作方式' },
+      { href: '#film', label: '影片' },
+      { href: '#plans', label: '方案' },
+      { href: '#faq', label: '常見問題' },
+    ],
     hero: {
-      slogan: "專業訓練，智能管理",
-      headline: "你的 AI 健身夥伴",
-      description: "CoreFit 結合先進 AI 技術與專業訓練科學，為你打造獨一無二的智能訓練體驗。無論是增肌、減脂還是提升運動表現，數據驅動你的每一次進步。",
-      ctaPrimary: "立即免費下載",
-      ctaSecondary: "了解更多",
-      stats: "超過 10,000+ 專業用戶的選擇",
-    },
-    intro: {
-      title: "什麼是 CoreFit？",
-      description: "CoreFit 是一款全方位的健身訓練管理應用程式，結合 AI 智能助手、系統化訓練計劃管理、社交功能和專業數據分析，為健身愛好者、專業運動員和健身教練提供最強大的支援。",
-      badges: ["AI 智能驅動", "300+ 動作庫", "訓練紀錄追蹤", "教練專用端"],
+      eyebrow: '每週跟著你演進的 AI 教練',
+      h1a: '課表跟著你成長，',
+      h1b: '每週都更好。',
+      sub: 'CoreFit 的 AI 教練每週看你實際{練了什麼}，{再排好下一週}。{今天該練什麼}、{每組該拿多重}，不用再猜。',
+      cta: '看看有哪些功能',
+      meta: {
+        sep: '・',
+        gap: '',
+        items: [
+          [{ text: '免費開始' }],
+          [{ text: 'iPhone 專用（iOS 15.6 以上）' }],
+          [{ text: '繁體中文／' }, { text: 'English', lang: 'en' }],
+        ],
+      },
     },
     features: {
-      title: "強大功能，一應俱全",
-      subtitle: "從訓練計劃到數據分析，滿足你對健身管理的所有想像",
-      categories: {
-        ai: {
-          title: "特化 AI 虛擬教練",
-          items: [
-            { iconName: "Bot", title: "AI 定製計劃", description: "根據目標與需求，即時定製個人專屬訓練計劃。" },
-            { iconName: "BrainCircuit", title: "AI 智能填重", description: "依據用戶資料和歷史表現，智能建議重量與次數。" },
-            { iconName: "Sparkles", title: "持續學習個人化", description: "AI 持續分析訓練數據，不斷優化個人化配適。" },
-          ]
+      eyebrow: '功能',
+      title: '從排課到練完，一路幫你顧好',
+      sub: '不用再自己東拼西湊排課表，也不用每次上槓前{都猜該拿多重。}',
+      chapters: [
+        {
+          shot: '01',
+          eyebrow: '特化 AI 教練',
+          title: '一份會跟著你調整的長期計畫',
+          body: '設定目標、經驗、每週能練幾天和{手邊器材}，AI 會排出{ 8、12 或 16 週}的週期化計畫。之後每一週，AI 教練都會先看你實際練得如何，{再排好下一週。}',
+          bullets: [
+            '持續學習個人化：AI 依你每週的紀錄與回報，{不斷優化下一週}',
+            '先免費預覽整段計畫藍圖，看完再決定{要不要開始}',
+            '新帳號在新手引導中生成的第 1 週課表免費{（限註冊 7 天內一次）}',
+            '生成時可以繼續用 App，排好{會通知你；}{生成失敗}重試{不會重複扣點}',
+          ],
+          tags: ['points'],
+          alt: 'CoreFit AI 演進計畫畫面：設定目標、計畫長度與每週訓練日，以及 12 週計畫中本週的課表與微調選項',
         },
-        resources: {
-          title: "豐富訓練資源",
-          items: [
-            { iconName: "Unlock", title: "官方計劃與課程全解鎖", description: "全面開啟 CoreFit 官方設計的多元訓練計劃與課程。" },
-            { iconName: "Dumbbell", title: "300+ 豐富動作庫", description: "結構化資料庫提供分步教學要點與標準示範影片，動作教學一應俱全。" },
-            { iconName: "Bookmark", title: "收藏功能", description: "收藏計劃與課程，快速建立你的訓練書籤庫。" },
-          ]
+        {
+          shot: '02',
+          eyebrow: '每週狀況回報',
+          title: '這週過得怎樣，跟 AI 教練說',
+          body: '每週回報睡眠、痠痛、哪裡會痛、{下週能用的器材}，也可以直接留話給 AI 教練。下一週的課表會照{這些回報來排，}AI 教練也會整理這週的完成率和重點，說明為什麼這樣安排。',
+          bullets: [
+            '器材有人在用、今天很累？隨時請 AI 微調{本週課表}：{換動作}、{只減量}，或{交給 AI 教練決定}',
+            '回報疼痛後，相關動作會換成較溫和的替代動作，或先移除',
+          ],
+          tags: ['points'],
+          alt: '本週狀況回報與教練的話：回報疼痛部位、下週可用器材，並查看教練整理的每週回顧',
         },
-        management: {
-          title: "強大訓練管理",
-          items: [
-            { iconName: "Calendar", title: "靈活訓練規劃", description: "隨時切換訓練，自由創建和編輯個人訓練計劃。" },
-            { iconName: "ClipboardList", title: "詳細訓練紀錄", description: "精確記錄組數、重量、次數、休息時間等參數。" },
-            { iconName: "WifiOff", title: "訓練不中斷", description: "強大的離線功能支持，網絡中斷也能訓練不中斷。" },
-          ]
+        {
+          shot: '03',
+          eyebrow: '智能填重',
+          title: '每組該拿多重，先幫你算好',
+          body: '智能填重會依你的訓練紀錄估算 1RM 基準，{再依你設定的} RIR{（預設保留 2 下）}建議{每一組的重量。}建議可以{逐筆套用}、{一次全部套用，}也可以直接拒絕。',
+          bullets: ['自己設定 RIR，決定每組要保留幾下', '訓練紀錄越多，建議越貼近你的實力'],
+          tags: ['points'],
+          alt: '智能填重：AI 依訓練紀錄建議每組重量，可以套用或拒絕',
         },
-        tracking: {
-          title: "數據分析與追蹤",
-          items: [
-            { iconName: "History", title: "完整訓練記錄與追蹤", description: "保持紀錄離線可用、雲端同步，完整保留訓練歷史與每次進步軌跡。" },
-            { iconName: "BarChart", title: "多維度數據統計", description: "實時統計歷史訓練量、完成率、PR 進展等指標。" },
-            { iconName: "LineChart", title: "可視化數據指標", description: "直觀的圖表展示訓練進步，全面追蹤訓練數據和身體指標。" },
-          ]
+        {
+          shot: '04',
+          eyebrow: '訓練紀錄',
+          title: '一組按一下，沒訊號也照樣記',
+          body: '做完一組按一下就記好，組間休息會自動{開始倒數}，秒數可以自己設定。地下室健身房{收不到訊號}也沒關係，{恢復連線後}會自動同步。',
+          bullets: ['精確記錄組數、重量、次數和{休息時間}', '公斤、磅隨時切換', '支援超級組（建立與編輯需 Pro）'],
+          tags: ['free'],
+          alt: '訓練紀錄畫面：逐組打勾完成、組間休息計時，離線也能記錄',
         },
-        social: {
-          title: "社交與分享",
-          items: [
-            { iconName: "Users", title: "好友同練", description: "即時分享計劃或課程給夥伴共同訓練。" },
-            { iconName: "Heart", title: "建立社交圈", description: "輕鬆管理好友關係，添加好友互相激勵。" },
-            { iconName: "Share2", title: "訓練成果分享", description: "展示個人訓練成就和進步。" },
-          ]
+        {
+          shot: '05',
+          eyebrow: '肌肉疲勞度',
+          title: '還沒恢復的部位，直接標在人體圖上',
+          body: '人體正面與背面圖會依最近 7 天的訓練標出{各部位的疲勞程度，}並列出近 72 小時的主要疲勞來源。選到{疲勞偏高部位}的動作時{會提醒你，}{覺得不準}也能手動調整。',
+          bullets: [
+            '依今天練的部位推薦熱身和伸展，{不喜歡可以換一批}',
+            '常用的熱身、伸展存成預設，新課表會自動帶入',
+          ],
+          tags: ['free'],
+          alt: '肌肉疲勞度人體圖，以及依今天訓練部位安排的熱身與伸展',
         },
-        coach: {
-          title: "專業教練工具",
-          items: [
-            { iconName: "ClipboardList", title: "學員管理", description: "輕鬆管理學員名單，指派專屬訓練計劃。" },
-            { iconName: "Eye", title: "進度追蹤", description: "即時查看學員完成率與訓練數據反饋。" },
-            { iconName: "Briefcase", title: "模板系統", description: "建立常用課表模板，快速指派給多位學員。" },
-          ]
-        }
-      }
+        {
+          shot: '06',
+          eyebrow: '動作庫',
+          title: '動作做對，再來加重',
+          body: '超過 300 個動作，內建 3D 示範動畫和逐步要點，可以依器材或部位搜尋，也能替動作加上 YouTube 影片連結或{自己的筆記。}',
+          bullets: [],
+          tags: ['free'],
+          alt: '動作庫：依器材與部位分類，附示範與逐步教學要點',
+        },
+        {
+          shot: '08',
+          eyebrow: '指標・個人紀錄',
+          title: '每個動作的進步，都留下軌跡',
+          body: '每個動作都有自己的個人紀錄、預估 1RM 趨勢、總訓練量，以及{重量與次數}的圖表。',
+          bullets: ['練完產生分享圖卡，要顯示哪些內容自己選', '用日曆排課、標記休息日，連續訓練{一看就知道}'],
+          tags: ['free'],
+          alt: '動作指標：個人紀錄、1RM 趨勢圖與總訓練量圖',
+        },
+        {
+          shot: '09',
+          eyebrow: '好友・學員',
+          title: '跟夥伴一起練，也能帶學員',
+          body: '加好友後，可以把計畫或課程直接傳給{一起練的夥伴}，{對方練完}你會{收到通知。}教練版可以{邀請學員}，學員接受後，你能查看他的{訓練日曆與紀錄}，並{直接指派課表給他。}',
+          bullets: ['加好友免費；分享課表需 Pro', '教練版內含 10 個學員席位，{可加購席位包}；{學員可以隨時自行解除連結}'],
+          tags: ['pro', 'coach'],
+          alt: '夥伴同練：把課表分享給夥伴，教練指派課表給學員',
+        },
+      ],
+      disclosure: '部分截圖與影片中的人物為 AI 生成影像。',
     },
-    advantages: {
-      title: "為什麼選擇 CoreFit？",
+    more: {
+      eyebrow: '更多功能',
+      title: '其他好用的地方',
       items: [
-        { title: "科學化訓練體系", description: "基於運動科學與生理學原理，確保每一個動作和計劃都能帶來最大的訓練效益，避免無效訓練。" },
-        { title: "AI 智能實時調整", description: "不同於固定課表，CoreFit 的 AI 會根據你當天的狀態、疲勞度和過往表現，動態調整訓練強度。" },
-        { title: "全方位數據洞察", description: "從單次訓練的微觀數據到長期進步的宏觀趨勢，提供深度分析報告，讓你更了解自己的身體。" }
-      ]
+        {
+          icon: BookOpen,
+          title: '官方計畫與課程',
+          body: 'CoreFit 官方設計的計畫和單次課程，有{女性專屬}、健身房、徒手、啞鈴等分類。{部分免費，}全部解鎖需要 Pro。',
+          tag: 'pro',
+        },
+        {
+          icon: Sparkles,
+          title: '單次生成課表',
+          body: '只想要一週的課表？說出目標、經驗和器材，AI 幫你排好，還附兩次免費微調。',
+          tag: 'points',
+        },
+        {
+          icon: ClipboardList,
+          title: '自己排課表',
+          body: '自己排的計畫和課程可以存成模板{重複使用}。{免費版可存} {1 個計畫}、{2 個模板}，{Pro 不限數量。}',
+        },
+        {
+          icon: Bell,
+          title: '提醒與通知',
+          body: '訓練日提醒、未完成訓練提醒；教練或好友{傳來新課表時，}{也會通知你。}',
+        },
+        {
+          icon: Languages,
+          title: '中英文介面',
+          body: '介面支援繁體中文與英文，可以用 Email、Google 或 Apple 帳號登入。',
+        },
+        {
+          icon: ShieldCheck,
+          title: '帳號由你決定',
+          body: '不想用了，可以直接在 App 內刪除帳號。了解刪除流程',
+          link: { text: '了解刪除流程', href: '/delete-account/' },
+        },
+      ],
     },
-    screenshots: {
-      title: "精美直觀的操作介面",
-      subtitle: "簡約而不簡單，讓你的專注力只在訓練本身",
-      captions: ["個人化首頁", "智能訓練計劃", "詳細動作指導", "訓練數據分析", "社群互動"]
+    how: {
+      eyebrow: '運作方式',
+      title: '三個步驟，開始照計畫練',
+      steps: [
+        {
+          title: '說出你的目標',
+          body: '目標、經驗、每週能練幾天、{手邊有什麼器材。}AI 先排出整段計畫藍圖，{免費看完}再決定。',
+        },
+        { title: '照著練，一鍵記錄', body: '智能填重先算好重量，{做完一組按一下}，{休息自動倒數。}' },
+        { title: '每週回報，下週更貼近你', body: '回報睡眠、痠痛和哪裡會痛，AI 教練依{這週的紀錄}{排好下一週。}' },
+      ],
+      note: '新帳號註冊 7 天內，透過新手引導生成第 1 週課表，首次免費。',
+    },
+    film: {
+      eyebrow: '影片',
+      title: '{花 30 秒，}{看看 CoreFit}',
+      body: '從 AI 演進計畫、智能填重、肌肉疲勞度，到{跟夥伴一起練}，一次看完。建議開聲音觀看。',
+      closing: '訓練，可以很簡單。',
+      disclosure: '影片中的人物為 AI 生成影像。',
+    },
+    plans: {
+      eyebrow: '方案',
+      title: '免費開始，需要時再升級',
+      plans: [
+        {
+          name: '免費',
+          lead: '下載就能開始',
+          items: [
+            '訓練紀錄、組間計時、離線記錄',
+            '300+ 動作庫與示範',
+            '肌肉疲勞度、各項指標與個人紀錄',
+            '部分官方計畫與課程',
+            '可存 1 個計畫、2 個模板',
+            '免費預覽 AI 演進計畫藍圖',
+            '新帳號在新手引導中生成的第 1 週課表免費{（限註冊 7 天內一次）}',
+          ],
+        },
+        {
+          name: 'Pro',
+          lead: '免費版的所有功能，再加上：',
+          items: [
+            '全部官方計畫與課程',
+            '計畫與模板不限數量',
+            '建立與編輯超級組',
+            '把課表分享給一起練的夥伴',
+            '每月重置為 300 點 CorePoints（{不累積}）',
+          ],
+          highlight: true,
+        },
+        {
+          name: '教練版',
+          lead: 'Pro 的所有功能，再加上：',
+          items: [
+            '邀請學員，對方接受後可查看{訓練日曆與紀錄}',
+            '直接把課表指派給學員',
+            '內含 10 個學員席位，{可加購席位包}',
+            '每月重置為 450 點 CorePoints（{不累積}）',
+          ],
+        },
+      ],
+      recommended: '推薦',
+      pointsTitle: 'CorePoints 是什麼？',
+      pointsBody:
+        'AI 排課、每週生成下一週、微調課表和智能填重會使用 CorePoints；訓練紀錄、計時器、動作庫和已經排好的課表都不扣點。點數也可以在 App 內單獨購買。',
+      fine: 'Pro 與教練版提供月繳、季繳與年繳，可以{隨時取消}；{價格依地區而異，}{以 App 內顯示為準。}{符合資格的新訂閱者可享免費試用。}',
+    },
+    faq: {
+      title: '常見問題',
+      firstPre: { q: 'CoreFit 什麼時候可以下載？', a: 'CoreFit 即將登上 App Store，{上架後}這裡就會放上下載連結。' },
+      firstLive: { q: 'CoreFit 可以下載了嗎？', a: '可以，CoreFit 已在 App Store 上架，免費下載。' },
+      items: [
+        {
+          q: '支援哪些裝置？',
+          a: '目前只支援 iPhone（iOS 15.6 以上），暫時沒有 Android 和 iPad 版，也還沒有串接 Apple\u00a0Health 或 Apple\u00a0Watch。',
+        },
+        {
+          q: '要付費才能用嗎？',
+          a: '不用。下載後就能免費記錄訓練、使用動作庫、看肌肉疲勞度和各項指標。想解鎖全部官方計畫、超級組、分享課表或帶學員，再升級 Pro 或教練版就好。AI 演進計畫除了新帳號{在新手引導中}免費的第 1 週，建立計畫、之後每週生成和微調都會使用 CorePoints；Pro 與教練版每月附點數，也可以在 App 內{單獨購買點數包。}',
+        },
+        {
+          q: 'AI 演進計畫跟一般課表有什麼不一樣？',
+          a: '一般課表排好就固定不變。演進計畫會依你每週實際的訓練紀錄和回報重新排下一週，AI 教練也會說明為什麼這樣排；週中遇到狀況，也能隨時微調。',
+        },
+        {
+          q: 'CorePoints 怎麼運作？',
+          a: 'AI 排課、每週生成下一週、微調和智能填重會使用 CorePoints。{訂閱點數}{每月重置}，Pro 為 300 點、{教練版為 450 點}，當月{沒用完的}點數不會累積到下個月；也可以在 App 內單獨購買點數包。{記錄訓練}、計時器、動作庫和{已排好的課表}都不扣點。',
+        },
+        {
+          q: 'Pro 和教練版差在哪裡？',
+          a: 'Pro 解鎖全部官方計畫與課程、不限數量的計畫與模板、超級組，以及把課表分享給夥伴。教練版包含 Pro 的全部功能，再加上{學員管理}：可以邀請學員（對方接受後才能查看他的訓練紀錄），並直接把課表指派給學員；內含 {10 個學員席位。}',
+        },
+        {
+          q: '有免費試用嗎？',
+          a: '符合資格的新訂閱者可享{免費試用}，資格由 Apple 判定。實際方案、價格與試用內容，以 App 內和 App Store 顯示為準。',
+        },
+        {
+          q: '只有啞鈴，或在家練也可以嗎？',
+          a: '可以。建立計畫時選擇{手邊的器材}，之後每週回報也能更新{下週可用的器材}。官方課程也有徒手和啞鈴分類。',
+        },
+        { q: '沒有網路可以用嗎？', a: '登入後就能離線記錄訓練，恢復連線會自動同步。註冊、AI 排課和智能填重需要連網。' },
+        {
+          q: '練到不舒服或受傷怎麼辦？',
+          a: '在每週回報或微調時回報疼痛部位，相關動作會換成較溫和的替代動作，或先移除。{CoreFit 提供的是}訓練建議，不能取代醫療診斷；疼痛持續{或加劇時，}請先停止訓練，並諮詢醫師或物理治療師。',
+        },
+        {
+          q: '怎麼取消訂閱或刪除帳號？',
+          a: '訂閱由 Apple 管理，可以在 {iPhone 的「設定」}＞{你的名稱}＞{「訂閱項目」}{隨時取消。}{帳號}{可以直接}在 App 內{刪除}，詳細說明{請見}刪除帳號頁面。',
+          link: { text: '刪除帳號頁面', href: '/delete-account/' },
+        },
+      ],
+      more: '還有問題嗎？寫信到',
+      email: 'support@corefit-ai.com',
     },
     download: {
-      title: "立即開始你的智能訓練之旅",
-      subtitle: "加入 CoreFit，讓每一次流汗都更有價值",
-      apple: "App Store 下載",
-      google: "Google Play 下載"
+      title: '{今天該練什麼，}不用再猜。',
+      subPre: '上架後可免費下載，iPhone 專用{（iOS 15.6 以上）。}',
+      subLive: '免費下載，先看看 AI 幫你排的計畫藍圖。iPhone 專用{（iOS 15.6 以上）。}',
+      secondary: '看介紹影片',
     },
     footer: {
-      contact: "聯繫我們",
-      business: "商務合作",
-      social: "關注我們",
-      copyright: "© 2026 CoreFit. All Rights Reserved."
-    }
+      tagline: '你只管練，其餘交給 AI。',
+      contact: '聯絡我們',
+      support: '客服',
+      partner: '合作洽談',
+      supportEmail: 'support@corefit-ai.com',
+      partnerEmail: 'business@corefit-ai.com',
+      legal: '條款與隱私',
+      links: [
+        { label: '服務條款', href: '/terms/' },
+        { label: '隱私權政策', href: '/privacy/' },
+        { label: '刪除帳號', href: '/delete-account/' },
+      ],
+      follow: '追蹤我們',
+      trademark:
+        'Apple 與 Apple 標誌是 Apple Inc. 在美國及其他國家和地區註冊的商標。App Store 是 Apple Inc. 在美國及其他國家和地區註冊的服務標誌。',
+      copyright: '© 2026 CoreFit 保留所有權利。',
+    },
   },
+
   en: {
-    nav: {
-      features: "Features",
-      download: "Download",
-      langSwitch: "繁體中文",
+    brand: 'CoreFit',
+    a11y: {
+      skip: 'Skip to main content',
+      navLabel: 'Main',
+      home: 'CoreFit home',
+      menuOpen: 'Open menu',
+      menuClose: 'Close menu',
+      langSwitch: '中文',
+      langHref: '/',
+      langLabel: '切換為繁體中文',
+      langCode: 'zh-Hant',
+      pause: 'Pause video',
+      play: 'Play video',
+      heroVideoDesc:
+        'A silent, looping 27-second CoreFit demo: an opening line ("Train smarter, not harder."), then app screens showing the AI coach\'s 12-week periodized plan and weekly recap, applying Smart Fill in one tap, one-tap set logging, personal record trends, official programs, mid-week tweaks, muscle fatigue, and exercise demos, ending on the CoreFit logo.',
+      filmPlay: 'Play the CoreFit overview video (with sound)',
+      filmVideoLabel: 'CoreFit overview video',
     },
+    tags: { free: 'Free', points: 'CorePoints', pro: 'Pro', coach: 'Coach' },
+    status: {
+      comingSoon: 'Coming soon to the App Store',
+      badgeAlt: 'Download on the App Store',
+      badgeSrc: appStoreBadgeEn,
+      navDownload: 'Download free',
+    },
+    nav: [
+      { href: '#features', label: 'Features' },
+      { href: '#how', label: 'How it works' },
+      { href: '#film', label: 'Video' },
+      { href: '#plans', label: 'Plans' },
+      { href: '#faq', label: 'FAQ' },
+    ],
     hero: {
-      slogan: "Professional Training, Smart Management",
-      headline: "Your AI Fitness Partner",
-      description: "CoreFit combines advanced AI technology with sports science to create a unique smart training experience. Whether building muscle or burning fat, let data drive your progress.",
-      ctaPrimary: "Get Started Free",
-      ctaSecondary: "Learn More",
-      stats: "Trusted by 10,000+ Professional Users",
-    },
-    intro: {
-      title: "What is CoreFit?",
-      description: "CoreFit is a comprehensive fitness management app combining an AI assistant, systematic planning, social features, and professional analytics to support enthusiasts, athletes, and coaches.",
-      badges: ["AI Driven", "300+ Exercises", "Workout Tracking", "Coach Tools"],
+      eyebrow: 'An AI coach that adapts weekly',
+      h1a: 'Stronger every week.',
+      h1b: 'So is your plan.',
+      sub: "CoreFit's AI coach looks at what you actually lifted each week, then builds the next one. No more guessing what to train, or how much to load.",
+      cta: 'Explore features',
+      meta: {
+        sep: ' ·',
+        gap: ' ',
+        items: [
+          [{ text: 'Free to start' }],
+          [{ text: 'iPhone only (iOS 15.6 or later)' }],
+          [{ text: 'English & ' }, { text: '繁體中文', lang: 'zh-Hant' }],
+        ],
+      },
     },
     features: {
-      title: "Powerful Features",
-      subtitle: "Everything you need for fitness management, from planning to analytics",
-      categories: {
-        ai: {
-          title: "Specialized AI Virtual Coach",
-          items: [
-            { iconName: "Bot", title: "AI Tailored Plans", description: "Instantly customize personal training plans based on goals and needs." },
-            { iconName: "BrainCircuit", title: "Smart Weight Suggestion", description: "Intelligently suggest weights and reps based on user profile and history." },
-            { iconName: "Sparkles", title: "Continuous Personalized Learning", description: "AI continuously analyzes training data to optimize your personal fit." },
-          ]
+      eyebrow: 'Features',
+      title: "From planning to your\u00a0last set, it's covered",
+      sub: 'No more piecing programs together or guessing your working weight before every set.',
+      chapters: [
+        {
+          shot: '01',
+          eyebrow: 'Specialized AI Coach',
+          title: 'A long-term plan that keeps adjusting to you',
+          body: 'Tell it your goal, experience, how many days you can train, and what equipment you have. AI lays out an 8-, 12-, or 16-week periodized plan, then reviews how each week actually went before building the next one.',
+          bullets: [
+            'Continuously personalized: AI keeps refining each new week from your logs and check-ins',
+            'Preview the full plan blueprint for free before you commit',
+            'Week 1 free for new accounts (once, during onboarding, within 7\u00a0days of\u00a0sign-up)',
+            "Keep using the app while it builds; you'll be notified when it's ready, and retrying a failed build never charges you twice",
+          ],
+          tags: ['points'],
+          alt: "CoreFit AI Evolving Plan: choosing a goal, plan length, and training days, with this week's sessions from a 12-week plan and tweak options",
         },
-        resources: {
-          title: "Rich Training Resources",
-          items: [
-            { iconName: "Unlock", title: "Unlock All Official Plans", description: "Full access to diverse training plans and courses designed by CoreFit." },
-            { iconName: "Dumbbell", title: "300+ Exercise Library", description: "Structured database with step-by-step guides and standard demo videos." },
-            { iconName: "Bookmark", title: "Favorites", description: "Bookmark plans and courses to quickly build your training library." },
-          ]
+        {
+          shot: '02',
+          eyebrow: 'Weekly check-in',
+          title: 'Tell your AI coach how the week went',
+          body: "Each week, check in on sleep, soreness, any pain, and next week's equipment, and leave your AI coach a note if you like. Next week is built around your answers, and your AI coach recaps how the week went and explains the thinking behind the plan.",
+          bullets: [
+            'Machine taken or running on empty? Tweak this week anytime: swap exercises, cut volume only, or let your AI\u00a0coach decide',
+            'Report pain, and the affected exercises are swapped for gentler alternatives or left out',
+          ],
+          tags: ['points'],
+          alt: "Weekly check-in and coach recap: reporting pain, next week's equipment, and the coach's weekly summary",
         },
-        management: {
-          title: "Powerful Management",
-          items: [
-            { iconName: "Calendar", title: "Flexible Planning", description: "Switch routines anytime, freely create and edit personal training plans." },
-            { iconName: "ClipboardList", title: "Detailed Logging", description: "Accurately record sets, weights, reps, rest times, and other parameters." },
-            { iconName: "WifiOff", title: "Uninterrupted Training", description: "Powerful offline support ensures your training continues even without network connection." },
-          ]
+        {
+          shot: '03',
+          eyebrow: 'Smart Fill',
+          title: 'Know what to load before you lift',
+          body: 'Smart Fill estimates a 1RM baseline from your training history, then suggests a weight for every set based on your target RIR (2 reps in reserve by default). Apply suggestions one by one or all at once, or skip them.',
+          bullets: [
+            'Set your RIR to decide how many reps to leave in the tank',
+            'Suggestions get closer to your real strength as you log more',
+          ],
+          tags: ['points'],
+          alt: 'Smart Fill suggesting a weight for each set from training history, with apply and reject options',
         },
-        tracking: {
-          title: "Analytics & Tracking",
-          items: [
-            { iconName: "History", title: "Complete Records & Tracking", description: "Keep records available offline and synced to the cloud, preserving full training history and every progress track." },
-            { iconName: "BarChart", title: "Multi-dimensional Statistics", description: "Real-time statistics on historical volume, completion rates, PR progress, and other metrics." },
-            { iconName: "LineChart", title: "Visualized Data Metrics", description: "Intuitive charts display training progress, comprehensively tracking workout data and body metrics." },
-          ]
+        {
+          shot: '04',
+          eyebrow: 'Workout logging',
+          title: 'One tap per set. No signal needed.',
+          body: "Tap once when a set is done and your rest timer starts on its own, set to whatever length you like. No signal in the basement gym? Keep logging; everything syncs when you're back online.",
+          bullets: ['Log sets, weight, reps, and rest times precisely', 'Switch between kg and lb anytime', 'Supersets supported (creating and editing requires Pro)'],
+          tags: ['free'],
+          alt: 'Workout logger: check off each set, rest timer between sets, works offline',
         },
-        social: {
-          title: "Social & Sharing",
-          items: [
-            { iconName: "Users", title: "Train with Friends", description: "Instantly share plans or courses with partners to train together." },
-            { iconName: "Heart", title: "Build Community", description: "Easily manage friendships and motivate each other." },
-            { iconName: "Share2", title: "Share Achievements", description: "Showcase your personal training achievements and progress." },
-          ]
+        {
+          shot: '05',
+          eyebrow: 'Muscle Fatigue',
+          title: "See what's still recovering, right on the body map",
+          body: "Front and back body maps show how fatigued each muscle group is based on your last 7 days of training, along with the main sources of fatigue from the last 72 hours. You'll get a heads-up when you pick an exercise for a muscle that's still worn out, and you can adjust the readings yourself.",
+          bullets: [
+            "Warm-ups and stretches picked for today's muscles; reshuffle for new picks anytime",
+            'Save your go-to warm-up and stretch routines, and new sessions add them\u00a0automatically',
+          ],
+          tags: ['free'],
+          alt: "Muscle fatigue body map, plus warm-ups and stretches chosen for today's session",
         },
-        coach: {
-          title: "Pro Coach Tools",
-          items: [
-            { iconName: "ClipboardList", title: "Client Management", description: "Easily manage client lists and assign exclusive plans." },
-            { iconName: "Eye", title: "Progress Tracking", description: "Real-time view of client completion rates and feedback." },
-            { iconName: "Briefcase", title: "Template System", description: "Build routine templates and assign to multiple clients quickly." },
-          ]
-        }
-      }
+        {
+          shot: '06',
+          eyebrow: 'Exercise library',
+          title: 'Get the form right, then add the weight',
+          body: 'More than 300 exercises with built-in 3D demo animations and step-by-step cues, searchable by equipment or muscle. Add YouTube links or your own notes to any of them.',
+          bullets: [],
+          tags: ['free'],
+          alt: 'Exercise library organized by equipment and muscle, with demos and step-by-step cues',
+        },
+        {
+          shot: '08',
+          eyebrow: 'Metrics · Personal records',
+          title: 'Watch every lift move forward',
+          body: 'Every exercise gets its own personal records, estimated 1RM trend, total volume, and weight-vs-reps chart.',
+          bullets: [
+            'Finish a workout and make a share card; you choose what it shows',
+            'Plan on a calendar, mark rest days, and keep your streak in view',
+          ],
+          tags: ['free'],
+          alt: 'Exercise metrics: personal records, estimated 1RM trend, and total volume chart',
+        },
+        {
+          shot: '09',
+          eyebrow: 'Friends · Students',
+          title: 'Train with friends. Coach your students.',
+          body: "Add friends and send them a plan or session directly, and you'll be notified when they finish it. With Coach, invite students; once they accept, you can see their training calendar and history and assign programs to them.",
+          bullets: [
+            'Adding friends is free; sharing plans requires Pro',
+            'Coach includes 10\u00a0student seats, with extra seat packs available; students can disconnect anytime',
+          ],
+          tags: ['pro', 'coach'],
+          alt: 'Training together: sharing a plan with a partner, and a coach assigning a program to a student',
+        },
+      ],
+      disclosure: 'Some people shown in screenshots and videos are AI-generated.',
     },
-    advantages: {
-      title: "Why Choose CoreFit?",
+    more: {
+      eyebrow: 'More features',
+      title: 'The details that help',
       items: [
-        { title: "Scientific Training System", description: "Based on sports science and physiology to ensure every move and plan delivers maximum efficiency." },
-        { title: "Real-time AI Adjustment", description: "Unlike fixed schedules, CoreFit's AI dynamically adjusts intensity based on your daily state and fatigue." },
-        { title: "Comprehensive Data Insights", description: "From micro-data of single sessions to macro-trends of long-term progress, providing deep analysis reports." }
-      ]
+        {
+          icon: BookOpen,
+          title: 'Official programs & sessions',
+          body: 'Official CoreFit programs and single sessions, including women-focused, gym, bodyweight, and dumbbell categories. Some are free; Pro unlocks them all.',
+          tag: 'pro',
+        },
+        {
+          icon: Sparkles,
+          title: 'One-off program',
+          body: 'Just need a week of training? Share your goal, experience, and equipment, and AI builds it, with two free tweaks included.',
+          tag: 'points',
+        },
+        {
+          icon: ClipboardList,
+          title: 'Build your own',
+          body: 'Build your own programs and sessions and save them as templates. Free includes 1\u00a0saved program and 2\u00a0templates; Pro is unlimited.',
+        },
+        {
+          icon: Bell,
+          title: 'Reminders',
+          body: 'Training-day and missed-workout reminders, plus a heads-up when a coach or friend sends you a new plan.',
+        },
+        {
+          icon: Languages,
+          title: 'English & Chinese',
+          body: 'Use the app in English or Traditional Chinese, and sign in with email, Google, or Apple.',
+        },
+        {
+          icon: ShieldCheck,
+          title: 'Your account, your call',
+          body: 'You can delete your account right in the app. How deletion works',
+          link: { text: 'How deletion works', href: '/en/delete-account/' },
+        },
+      ],
     },
-    screenshots: {
-      title: "Intuitive Interface",
-      subtitle: "Simple yet powerful, keeping your focus on the training itself",
-      captions: ["Personalized Dashboard", "Smart Training Plan", "Detailed Exercise Guide", "Analytics & Progress", "Community"]
+    how: {
+      eyebrow: 'How it works',
+      title: 'Get started in three steps',
+      steps: [
+        {
+          title: 'Tell it your goal',
+          body: 'Your goal, experience, training days, and equipment. AI drafts a full plan blueprint you can preview for free before you commit.',
+        },
+        {
+          title: 'Train and log',
+          body: 'Smart Fill suggests your weights, one tap logs each set, and the rest timer runs itself.',
+        },
+        {
+          title: 'Check in every week',
+          body: "Share how you slept, what's sore, and anything that hurts. Your AI coach builds next week from this week's training.",
+        },
+      ],
+      note: 'Week 1 is free for new accounts: generate it during onboarding within 7\u00a0days of signing up (one time only).',
+    },
+    film: {
+      eyebrow: 'Video',
+      title: 'See CoreFit in 30 seconds',
+      body: 'The AI\u00a0Evolving\u00a0Plan, Smart Fill, muscle fatigue, and training with friends, all in one go. Best with sound on.',
+      closing: 'Training, made simple.',
+      disclosure: 'People shown in this video are AI-generated.',
+    },
+    plans: {
+      eyebrow: 'Plans',
+      title: 'Start free. Upgrade when you need more.',
+      plans: [
+        {
+          name: 'Free',
+          lead: 'Everything you need to start',
+          items: [
+            'Workout logging, rest timer, and offline mode',
+            '300+ exercises with demos',
+            'Muscle fatigue, exercise metrics, and personal records',
+            'Selected official programs and sessions',
+            '1\u00a0saved program and 2\u00a0templates',
+            'Free AI plan blueprint preview',
+            'Week 1 free for new accounts (once, during onboarding, within 7\u00a0days of\u00a0sign-up)',
+          ],
+        },
+        {
+          name: 'Pro',
+          lead: 'Everything in Free, plus:',
+          items: [
+            'All official programs and sessions',
+            'Unlimited programs and\u00a0templates',
+            'Create and edit supersets',
+            'Share plans with friends',
+            'CorePoints reset to 300 every month (no rollover)',
+          ],
+          highlight: true,
+        },
+        {
+          name: 'Coach',
+          lead: 'Everything in Pro, plus:',
+          items: [
+            'Invite students and, once they accept, see their training calendar and history',
+            'Assign programs to your students',
+            '10\u00a0student seats included, with extra seat packs available',
+            'CorePoints reset to 450 every month (no rollover)',
+          ],
+        },
+      ],
+      recommended: 'Recommended',
+      pointsTitle: 'What are CorePoints?',
+      pointsBody:
+        'CorePoints power the AI features: building plans, generating next week, tweaks, and Smart Fill. Logging workouts, timers, the exercise library, and plans you already have never use points. You can also buy point packs in the app.',
+      fine: 'Pro and Coach are available monthly, quarterly, or yearly, and you can cancel anytime. Prices for your region are shown in the app. Free trial available for eligible new subscribers.',
+    },
+    faq: {
+      title: 'Frequently asked questions',
+      firstPre: {
+        q: 'When can I get CoreFit?',
+        a: "CoreFit is coming soon to the App Store. We'll add the download link here as soon as it's live.",
+      },
+      firstLive: { q: 'Is CoreFit available now?', a: 'Yes. CoreFit is on the App Store and free to download.' },
+      items: [
+        {
+          q: 'Which devices are supported?',
+          a: "CoreFit runs on iPhone with iOS\u00a015.6\u00a0or\u00a0later. There's no Android or iPad version yet, and it doesn't connect to Apple\u00a0Health or Apple\u00a0Watch yet.",
+        },
+        {
+          q: 'Do I have to pay?',
+          a: 'No. You can log workouts, browse the exercise library, and see muscle fatigue and metrics for free. Upgrade to Pro or Coach when you want every official program, supersets, plan sharing, or student management. Beyond the free first week for new accounts, creating a plan, generating each new week, and tweaks in the AI\u00a0Evolving\u00a0Plan use CorePoints, which come monthly with Pro and Coach or as point packs in the app.',
+        },
+        {
+          q: 'How is the AI\u00a0Evolving\u00a0Plan different from a regular program?',
+          a: 'A regular program stays fixed. The Evolving\u00a0Plan builds each new week from what you actually logged and how your check-in went, your AI coach explains the reasoning, and you can tweak the current week anytime.',
+        },
+        {
+          q: 'How do CorePoints work?',
+          a: "AI features like building plans, generating next week, tweaks, and Smart Fill use CorePoints. Your subscription points reset each month to 300 on Pro or 450 on Coach, and unused subscription points don't roll over. You can also buy point packs in the app. Logging, timers, the library, and existing plans never use points.",
+        },
+        {
+          q: "What's the difference between Pro and Coach?",
+          a: 'Pro unlocks every official program and session, unlimited programs and templates, supersets, and sharing with friends. Coach includes everything in Pro plus student management: invite students, see their training once they accept, and assign programs to them. Coach includes 10\u00a0student\u00a0seats.',
+        },
+        {
+          q: 'Is there a free trial?',
+          a: 'Eligible new subscribers can start with a free trial. Apple determines eligibility, and the exact plans, prices, and trial terms are shown in the app and on the App Store.',
+        },
+        {
+          q: 'Can I train at home or with just dumbbells?',
+          a: 'Yes. Choose the equipment you have when you set up a plan, and change next week\'s equipment in each weekly check-in. Official sessions also include bodyweight and dumbbell categories.',
+        },
+        {
+          q: 'Does it work offline?',
+          a: "Once you've signed in, yes for logging; your workouts sync when you're back online. Sign-up, AI plan building, and Smart Fill need a connection.",
+        },
+        {
+          q: 'What if something hurts?',
+          a: 'Report the area in your weekly check-in or a tweak, and related exercises are swapped for gentler alternatives or left out. CoreFit gives training guidance, not medical advice. If pain persists or gets worse, stop training and see a doctor or physical therapist.',
+        },
+        {
+          q: 'How do I cancel my subscription or delete my account?',
+          a: 'Subscriptions are managed by Apple. Cancel anytime in iPhone Settings > your name > Subscriptions. You can delete your account right in the app; see the Delete Account page for details.',
+          link: { text: 'Delete Account page', href: '/en/delete-account/' },
+        },
+      ],
+      more: 'Still have questions? Email',
+      email: 'support@corefit-ai.com',
     },
     download: {
-      title: "Start Your Smart Training Journey",
-      subtitle: "Join CoreFit and make every drop of sweat count.",
-      apple: "Download on App Store",
-      google: "Get it on Google Play"
+      title: 'Stop guessing what to train today.',
+      subPre: 'Free to download once it launches. For iPhone (iOS\u00a015.6\u00a0or\u00a0later).',
+      subLive: 'Download free and preview the plan blueprint AI builds for you. For iPhone (iOS\u00a015.6\u00a0or\u00a0later).',
+      secondary: 'Watch the video',
     },
     footer: {
-      contact: "Contact Us",
-      business: "Business",
-      social: "Follow Us",
-      copyright: "© 2026 CoreFit. All Rights Reserved."
-    }
-  }
+      tagline: 'You lift. AI does the rest.',
+      contact: 'Contact',
+      support: 'Support',
+      partner: 'Partnerships',
+      supportEmail: 'support@corefit-ai.com',
+      partnerEmail: 'business@corefit-ai.com',
+      legal: 'Legal',
+      links: [
+        { label: 'Terms of Service', href: '/en/terms/' },
+        { label: 'Privacy Policy', href: '/en/privacy/' },
+        { label: 'Delete Account', href: '/en/delete-account/' },
+      ],
+      follow: 'Follow us',
+      trademark:
+        'Apple and the Apple logo are trademarks of Apple Inc., registered in the U.S. and other countries and regions. App Store is a service mark of Apple Inc., registered in the U.S. and other countries and regions.',
+      copyright: '© 2026 CoreFit. All rights reserved.',
+    },
+  },
 };

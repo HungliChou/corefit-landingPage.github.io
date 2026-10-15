@@ -1,62 +1,74 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant-TW">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#070912" />
   <title>下載 CoreFit</title>
+  <link rel="icon" href="/favicon.ico" sizes="any" />
   <style>
     * { box-sizing: border-box; }
     body {
       margin: 0;
       min-height: 100vh;
-      background: #121212;
-      color: #fff;
+      min-height: 100svh;
+      background: #070912;
+      color: #F4F6FB;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 24px 16px;
       text-align: center;
     }
-    .logo { width: 120px; height: auto; margin-bottom: 24px; }
-    h1 { font-size: 1.5rem; margin: 0 0 8px; font-weight: 600; }
-    .sub { color: #A2A2A2; font-size: 0.95rem; margin-bottom: 24px; }
+    .logo { width: 96px; height: 96px; margin-bottom: 24px; border-radius: 22px; }
+    h1 { font-size: 1.5rem; margin: 0 0 8px; font-weight: 700; }
+    .sub { color: #B4BBCC; font-size: 0.95rem; line-height: 1.6; margin: 0 0 24px; max-width: 320px; }
     .btns { display: flex; flex-direction: column; gap: 12px; max-width: 280px; width: 100%; }
     .btn {
       display: block;
       padding: 14px 24px;
-      border-radius: 12px;
+      border-radius: 9999px;
       font-size: 1rem;
-      font-weight: 500;
+      font-weight: 600;
       text-decoration: none;
-      border: none;
       cursor: pointer;
       transition: opacity 0.2s;
     }
     .btn:active { opacity: 0.85; }
-    .btn-ios { background: #000; color: #fff; }
+    .btn-ios { background: linear-gradient(90deg, #2F6BFF, #7C4DFF); color: #fff; }
     .btn-android { background: #3ddc84; color: #000; }
-    .hint { margin-top: 20px; font-size: 0.85rem; color: #666; }
-    .not-available { margin-top: 16px; padding: 12px; background: #1A1A1A; border-radius: 8px; font-size: 0.9rem; color: #A2A2A2; display: none; }
+    .btn[hidden] { display: none; }
+    .hint { margin: 16px 0 0; font-size: 0.85rem; color: #8A92A6; }
+    .hint[hidden] { display: none; }
+    .not-available { margin: 0 0 8px; padding: 12px 16px; background: #0E1220; border: 1px solid rgba(255,255,255,.08); border-radius: 12px; font-size: 0.9rem; color: #B4BBCC; display: none; max-width: 320px; }
     .not-available.show { display: block; }
+    .links { margin-top: 28px; display: flex; gap: 20px; justify-content: center; font-size: 0.95rem; }
+    .links a { color: #8FB0FF; text-decoration: none; }
+    .links a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-  <img class="logo" src="../logo-384.webp" alt="CoreFit" />
-  <h1>下載 CoreFit</h1>
-  <p class="sub">正在前往下載頁面…</p>
-  <div class="btns">
-    <a id="btn-ios" class="btn btn-ios" href="#">iOS 下載</a>
-    <a id="btn-android" class="btn btn-android" href="#">Android 下載</a>
-  </div>
-  <p class="hint">若沒有自動跳轉，請點按鈕</p>
+  <img class="logo" src="../logo-384.webp" alt="CoreFit" width="96" height="96" />
+  <h1 id="title">下載 CoreFit</h1>
+  <p id="sub" class="sub">正在前往下載頁面…</p>
   <p id="not-available" class="not-available">iOS 版本尚未上架，敬請期待。</p>
+  <div class="btns">
+    <a id="btn-ios" class="btn btn-ios" href="#" hidden>iOS 下載</a>
+    <a id="btn-android" class="btn btn-android" href="#" hidden>Android 下載</a>
+  </div>
+  <p id="hint" class="hint" hidden>若沒有自動跳轉，請點按鈕</p>
+  <nav class="links" aria-label="CoreFit">
+    <a id="link-home" href="/">認識 CoreFit</a>
+    <a id="link-lang" href="/en/" lang="en" hreflang="en">English</a>
+  </nav>
 
   <script>
     // ---------- 可配置常數（上架後請填寫）----------
-    var IOS_APPSTORE_URL = "TODO_APPSTORE_URL";       // 上架後填 https://apps.apple.com/app/idxxxx
-    var ANDROID_PLAY_URL = "TODO_PLAY_URL";           // 上架後填 https://play.google.com/store/apps/details?id=xxxx
+    var IOS_APPSTORE_URL = "TODO_APPSTORE_URL";       // 上架後填 https://apps.apple.com/app/id6757706921
+    var ANDROID_PLAY_URL = "TODO_PLAY_URL";           // 目前沒有 Android 版；留空時不顯示 Android 按鈕
     var IOS_TESTFLIGHT_URL = "";                      // 選填：TestFlight 連結，App Store 未填時使用
     // ----------------------------------------------
 
@@ -64,6 +76,8 @@
       var ua = navigator.userAgent || "";
       var isIOS = /iPad|iPhone|iPod/.test(ua) || (ua.indexOf("Mac") !== -1 && "ontouchend" in document);
       var isAndroid = /Android/i.test(ua);
+      var langs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""]);
+      var isZh = /^zh/i.test(langs[0] || "");
 
       var allowedHosts = ["apps.apple.com", "itunes.apple.com", "play.google.com"];
       function isAllowed(url) {
@@ -77,28 +91,54 @@
       var iosUrl = IOS_APPSTORE_URL && isAllowed(IOS_APPSTORE_URL) ? IOS_APPSTORE_URL : (IOS_TESTFLIGHT_URL && isAllowed(IOS_TESTFLIGHT_URL) ? IOS_TESTFLIGHT_URL : null);
       var androidUrl = ANDROID_PLAY_URL && isAllowed(ANDROID_PLAY_URL) ? ANDROID_PLAY_URL : null;
 
-      var btnIos = document.getElementById("btn-ios");
-      var btnAndroid = document.getElementById("btn-android");
-      var notAvailable = document.getElementById("not-available");
+      var $ = function (id) { return document.getElementById(id); };
+      var btnIos = $("btn-ios");
+      var btnAndroid = $("btn-android");
+      var notAvailable = $("not-available");
+      var sub = $("sub");
+      var hint = $("hint");
+
+      // 非中文使用者（例如收到英文分享連結的人）改顯示英文
+      if (!isZh) {
+        document.documentElement.lang = "en";
+        document.title = "Get CoreFit";
+        $("title").textContent = "Get CoreFit";
+        btnIos.textContent = "Download for iPhone";
+        btnAndroid.textContent = "Get it on Android";
+        notAvailable.textContent = "CoreFit for iPhone is coming soon to the App Store.";
+        hint.textContent = "Not redirected? Tap the button.";
+        $("link-home").textContent = "About CoreFit";
+        $("link-home").href = "/en/";
+        var langLink = $("link-lang");
+        langLink.textContent = "中文";
+        langLink.href = "/";
+        langLink.lang = "zh-Hant";
+        langLink.hreflang = "zh-Hant";
+      }
 
       if (iosUrl) {
         btnIos.href = iosUrl;
         btnIos.target = "_blank";
         btnIos.rel = "noopener noreferrer";
-      } else {
-        btnIos.href = "#";
-        btnIos.onclick = function (e) {
-          e.preventDefault();
-          notAvailable.classList.add("show");
-        };
+        btnIos.hidden = false;
       }
       if (androidUrl) {
         btnAndroid.href = androidUrl;
         btnAndroid.target = "_blank";
         btnAndroid.rel = "noopener noreferrer";
+        btnAndroid.hidden = false;
+      }
+
+      var willRedirect = (isAndroid && androidUrl) || (isIOS && iosUrl);
+      if (willRedirect) {
+        sub.textContent = isZh ? "正在前往下載頁面…" : "Taking you to the download page…";
+        hint.hidden = false;
+      } else if (iosUrl || androidUrl) {
+        sub.textContent = isZh ? "CoreFit 是 iPhone 上的 AI 健身課表 App。" : "CoreFit is an AI workout planner for iPhone.";
       } else {
-        btnAndroid.href = "#";
-        btnAndroid.onclick = function (e) { e.preventDefault(); };
+        // 尚未上架：直接說明，不顯示假按鈕
+        sub.textContent = isZh ? "CoreFit 是 iPhone 上的 AI 健身課表 App。" : "CoreFit is an AI workout planner for iPhone.";
+        notAvailable.classList.add("show");
       }
 
       setTimeout(function () {
@@ -106,12 +146,8 @@
           window.location.assign(androidUrl);
           return;
         }
-        if (isIOS) {
-          if (iosUrl) {
-            window.location.assign(iosUrl);
-          } else {
-            notAvailable.classList.add("show");
-          }
+        if (isIOS && iosUrl) {
+          window.location.assign(iosUrl);
         }
       }, 300);
     })();
