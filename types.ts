@@ -10,8 +10,12 @@ export interface InlineLink {
   href: string;
 }
 
+/** 功能卡片用的 App 介面裁圖（public/media/ui-{zh,en}-<name>.webp）。 */
+export type UiShot = 'plan' | 'setup' | 'checkin' | 'smartfill' | 'logging' | 'fatigue' | 'demo' | 'metrics' | 'calendar';
+
 export interface Chapter {
-  shot: '01' | '02' | '03' | '04' | '05' | '06' | '08' | '09';
+  /** 卡片配圖：第一張是主圖；第二張只在桌機大卡上疊在主圖後方。 */
+  ui: [UiShot] | [UiShot, UiShot];
   eyebrow: string;
   title: string;
   body: string;
@@ -85,7 +89,17 @@ export interface ContentData {
     /** 首屏說明列：每個 item 是不換行的一組；只在 item 之間（分隔符號後）換行。 */
     meta: { sep: string; gap: string; items: TextPart[][] };
   };
-  features: { eyebrow: string; title: string; sub: string; chapters: Chapter[]; disclosure: string };
+  features: {
+    eyebrow: string;
+    title: string;
+    sub: string;
+    chapters: Chapter[];
+    /** <1024 橫向滑動列：可見的滑動提示、捲動區塊的 aria-label、上一個／下一個按鈕的 aria-label。 */
+    swipeHint: string;
+    listLabel: string;
+    prev: string;
+    next: string;
+  };
   more: { eyebrow: string; title: string; items: MoreItem[] };
   how: { eyebrow: string; title: string; steps: Step[]; note: string };
   film: { eyebrow: string; title: string; body: string; closing: string; disclosure: string };
