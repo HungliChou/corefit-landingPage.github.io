@@ -4,7 +4,7 @@ import { CONTENT } from './constants';
 import { useLang } from './hooks';
 
 import SkipLink from './components/SkipLink';
-import Navbar from './components/Navbar';
+import Navbar, { LANG_POS_KEY, LANG_PROBE } from './components/Navbar';
 import Hero from './components/Hero';
 import Story from './components/Story';
 import MoreFeatures from './components/MoreFeatures';
@@ -16,7 +16,7 @@ import DownloadCta from './components/DownloadCta';
 import Footer from './components/Footer';
 
 /**
- * 帶錨點進站（/#plans、/en/#faq、切換語言後的 /en/#plans）時捲到該區塊。
+ * 帶錨點進站（/#plans、/en/#faq、切換語言後的 /en/#plans）時捲到該區塊；切換語言時還會還原在區塊內的相對位置。
  * index.html 的靜態 fallback 沒有這些 id，瀏覽器自己的錨點捲動在 React 渲染前就跑完了，所以要補做。
  * - 用 requestAnimationFrame：Tailwind Play CDN 以 MutationObserver 產生 class，要等它跑完版面才正確。
  * - 一律瞬間跳轉（不走 html 的 smooth scroll），並沿用 CSS 的 scroll-margin-top。
@@ -30,14 +30,29 @@ function useInitialHashScroll() {
     } catch {
       return;
     }
-    if (!id || window.scrollY > 0) return;
+    // 切換語言時存下的「在區塊內的比例」（見 Navbar.tsx switchLanguage），只用一次。
+    let ratio: number | null = null;
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(LANG_POS_KEY) ?? 'null') as { id?: string; ratio?: number } | null;
+      sessionStorage.removeItem(LANG_POS_KEY);
+      if (saved && saved.id === id && typeof saved.ratio === 'number') ratio = Math.min(Math.max(saved.ratio, 0), 1);
+    } catch {
+      /* 忽略 */
+    }
+    if (!id || (ratio === null && window.scrollY > 0)) return;
 
     let cancelled = false;
     let landedAt = -1;
     const jump = () => {
       const el = document.getElementById(id);
       if (!el) return;
-      el.scrollIntoView({ block: 'start', behavior: 'instant' as ScrollBehavior });
+      if (ratio === null) {
+        el.scrollIntoView({ block: 'start', behavior: 'instant' as ScrollBehavior });
+      } else {
+        const r = el.getBoundingClientRect();
+        const y = window.scrollY + r.top + r.height * ratio - window.innerHeight * LANG_PROBE;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'instant' as ScrollBehavior });
+      }
       landedAt = window.scrollY;
     };
     const raf = requestAnimationFrame(() => {

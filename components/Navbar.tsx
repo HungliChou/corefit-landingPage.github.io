@@ -10,12 +10,40 @@ interface NavbarProps {
   setMenuOpen: (open: boolean) => void;
 }
 
-/** 語言切換是整頁導覽，並保留目前的錨點（例如 /en/#plans → /#plans）。 */
+/**
+ * 語言切換是整頁導覽，並停在「目前正在看的區塊」的同一相對位置。
+ * 不用 location.hash：它只記得最後一次點導覽列的錨點，使用者自己捲動後就過時了（例如一直帶著 #film）。
+ * 做法：在視窗 35% 高度處找出所在的區塊與在區塊內的比例，錨點帶區塊 id，比例存 sessionStorage，
+ * 新頁面由 App.tsx 的 useInitialHashScroll 還原（兩種語言的區塊高度不同，所以存比例而不是像素）。
+ */
+export const LANG_POS_KEY = 'cf-lang-pos';
+export const LANG_PROBE = 0.35;
+const SECTION_IDS = ['top', 'features', 'more', 'how', 'film', 'plans', 'faq', 'download'];
+
 function switchLanguage(e: React.MouseEvent<HTMLAnchorElement>) {
   if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
   e.preventDefault();
   const href = e.currentTarget.getAttribute('href') ?? '/';
-  window.location.assign(href + window.location.hash);
+  const probe = window.innerHeight * LANG_PROBE;
+  let id = '';
+  let ratio = 0;
+  if (window.scrollY > 8) {
+    for (const sid of SECTION_IDS) {
+      const r = document.getElementById(sid)?.getBoundingClientRect();
+      if (r && r.top <= probe && r.bottom > probe) {
+        id = sid;
+        ratio = (probe - r.top) / r.height;
+        break;
+      }
+    }
+  }
+  try {
+    if (id) sessionStorage.setItem(LANG_POS_KEY, JSON.stringify({ id, ratio }));
+    else sessionStorage.removeItem(LANG_POS_KEY);
+  } catch {
+    /* 無痕模式等情況存不了：只回到區塊開頭 */
+  }
+  window.location.assign(href + (id && id !== 'top' ? `#${id}` : ''));
 }
 
 const Navbar: React.FC<NavbarProps> = ({ content, menuOpen, setMenuOpen }) => {
