@@ -86,38 +86,50 @@ const FeatureStage: React.FC<{ lang: Lang; chapter: Chapter; index: number; wide
   );
 };
 
-const FeatureText: React.FC<{ chapter: Chapter; content: ContentData; wide: boolean }> = ({ chapter, content, wide }) => (
-  <div className="feat__body">
-    <div className="feat__meta flex flex-wrap items-center gap-x-2.5 gap-y-1.5">
-      <p className="eyebrow">
-        <CjkText text={chapter.eyebrow} tail={false} />
+/**
+ * 卡片文字：功能名稱（h3）是主標題，下面一句副標說明它做什麼，再來是內文與重點。
+ * 圖示與方案標籤排在名稱上方同一列（圖示靠左、標籤靠右），名稱獨佔整行，
+ * 每張卡的名稱起點一致；一般卡片的這一列跨在舞台下緣（見 index.css .feat__body），大卡則在文字欄頂端。
+ * DOM 順序是名稱 → 標籤，螢幕閱讀器先讀到功能名稱。
+ */
+const FeatureText: React.FC<{ chapter: Chapter; content: ContentData; wide: boolean }> = ({ chapter, content, wide }) => {
+  const Icon = chapter.icon;
+  return (
+    <div className="feat__body">
+      <div className="feat__head">
+        <h3 className={wide ? 'feat__name feat__name--lg' : 'feat__name'}>
+          <CjkText text={chapter.name} tail={false} />
+        </h3>
+        <span className="feat__tags">
+          {chapter.tags.map((tag) => (
+            <PlanBadge key={tag} tag={tag} label={content.tags[tag]} />
+          ))}
+        </span>
+        <span className="feat__icon" aria-hidden="true">
+          <Icon size={wide ? 20 : 18} strokeWidth={2} />
+        </span>
+      </div>
+      <p className={wide ? 'feat__lead feat__lead--lg' : 'feat__lead'}>
+        <CjkText text={chapter.lead} />
       </p>
-      <span className="feat__tags">
-        {chapter.tags.map((tag) => (
-          <PlanBadge key={tag} tag={tag} label={content.tags[tag]} />
-        ))}
-      </span>
+      <p className="feat__copy mt-2.5">
+        <CjkText text={chapter.body} />
+      </p>
+      {chapter.bullets.length > 0 && (
+        <ul className="bullets mt-3 space-y-1.5">
+          {chapter.bullets.map((b) => (
+            <li key={b} className="feat__bullet">
+              <span className="dot mt-[0.62em]" aria-hidden="true" />
+              <span>
+                <CjkText text={b} />
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
-    <h3 className={`${wide ? 'feat__title feat__title--lg' : 'feat__title'} mt-2.5 text-ink`}>
-      <CjkText text={chapter.title} />
-    </h3>
-    <p className="feat__copy mt-2">
-      <CjkText text={chapter.body} />
-    </p>
-    {chapter.bullets.length > 0 && (
-      <ul className="bullets mt-3 space-y-1.5">
-        {chapter.bullets.map((b) => (
-          <li key={b} className="feat__bullet">
-            <span className="dot mt-[0.62em]" aria-hidden="true" />
-            <span>
-              <CjkText text={b} />
-            </span>
-          </li>
-        ))}
-      </ul>
-    )}
-  </div>
-);
+  );
+};
 
 /** ≥1024：三欄 bento。第一張（AI 教練）是橫跨兩欄的大卡，文字在左、畫面在右。 */
 const FeatureGrid: React.FC<StoryProps> = ({ content, lang }) => (
@@ -126,7 +138,7 @@ const FeatureGrid: React.FC<StoryProps> = ({ content, lang }) => (
       const wide = i === 0;
       return (
         <Reveal
-          key={chapter.eyebrow}
+          key={chapter.name}
           as="li"
           amount={0.2}
           y={16}
@@ -205,7 +217,7 @@ const FeatureRail: React.FC<StoryProps> = ({ content, lang }) => {
     <div className="mt-8 md:mt-10">
       <ol ref={railRef} className="feat-rail" tabIndex={0} aria-label={features.listLabel}>
         {chapters.map((chapter, i) => (
-          <li key={chapter.eyebrow} className="feat">
+          <li key={chapter.name} className="feat">
             <FeatureStage lang={lang} chapter={chapter} index={i} wide={false} />
             <FeatureText chapter={chapter} content={content} wide={false} />
           </li>
@@ -215,7 +227,7 @@ const FeatureRail: React.FC<StoryProps> = ({ content, lang }) => {
         <div className="flex min-w-0 items-center gap-3">
           <div className="feat-dots shrink-0" aria-hidden="true">
             {chapters.slice(0, stops).map((c, i) => (
-              <span key={c.eyebrow} className={i === active ? 'is-active' : ''} />
+              <span key={c.name} className={i === active ? 'is-active' : ''} />
             ))}
           </div>
           {/* Below 360px the row cannot fit dots + hint + both buttons; the arrows and dots already say "swipe". */}

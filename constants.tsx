@@ -1,4 +1,4 @@
-import { Bell, BookOpen, ClipboardList, Languages, ShieldCheck, Sparkles } from 'lucide-react';
+import { Activity, Bell, BookOpen, BrainCircuit, CirclePlay, ClipboardList, Languages, ListChecks, MessageSquareText, ShieldCheck, Sparkles, TrendingUp, Users, WandSparkles } from 'lucide-react';
 import type { ContentData, Lang } from './types';
 import appStoreBadgeEn from './app-store-badge-en.svg';
 import appStoreBadgeZhTw from './app-store-badge-zh-tw.svg';
@@ -62,17 +62,19 @@ export const CONTENT: Record<Lang, ContentData> = {
       chapters: [
         {
           ui: ['plan', 'setup'],
-          eyebrow: '特化 AI 教練',
-          title: '一份會跟著你調整的長期計畫',
+          name: '特化 AI 教練',
+          icon: BrainCircuit,
+          lead: '一份會跟著你調整的長期計畫',
           body: '設定目標、經驗、每週天數和{手邊器材}，AI 排出{ 8、12 或 16 週}的週期化計畫。之後每一週都先看你{練得如何，}{再排好下一週。}',
           bullets: ['持續學習個人化：AI 依你每週的紀錄與回報，{不斷優化下一週}', '先免費預覽整段計畫藍圖，{看完再決定}'],
           tags: ['points'],
-          alt: 'AI 演進計畫：12 週計畫目前在第 3 週，顯示累積期與強化期的進度',
+          alt: '計畫週期卡：12 週計畫目前在第 3 週，顯示累積期與強化期的進度',
         },
         {
           ui: ['checkin'],
-          eyebrow: '每週狀況回報',
-          title: '這週過得怎樣，{跟 AI 教練說}',
+          name: '每週狀況回報',
+          icon: MessageSquareText,
+          lead: '這週過得怎樣，{跟 AI 教練說}',
           body: '回報睡眠、痠痛、疼痛部位和{下週器材，}下一週就照這些排；回報疼痛後，相關動作會換成{較溫和的替代動作}或先移除。',
           bullets: [
             '{週中有狀況？}隨時請 AI 微調本週：{換動作}、{只減量}，或{交給 AI 教練決定}',
@@ -83,8 +85,9 @@ export const CONTENT: Record<Lang, ContentData> = {
         },
         {
           ui: ['smartfill'],
-          eyebrow: '智能填重',
-          title: '每組該拿多重，先幫你算好',
+          name: '智能填重',
+          icon: WandSparkles,
+          lead: '每組該拿多重，先幫你算好',
           body: '依訓練紀錄估算 1RM 基準，再照{你設定的 RIR}{（預設保留 2 下）}建議{每一組的重量；}可以{逐筆套用}、{全部套用}或{直接拒絕。}',
           bullets: ['訓練紀錄越多，{建議越貼近你的實力}'],
           tags: ['points'],
@@ -92,8 +95,9 @@ export const CONTENT: Record<Lang, ContentData> = {
         },
         {
           ui: ['logging'],
-          eyebrow: '訓練紀錄',
-          title: '一組按一下，{沒訊號也照樣記}',
+          name: '訓練紀錄',
+          icon: ListChecks,
+          lead: '一組按一下，{沒訊號也照樣記}',
           body: '做完一組按一下，組間休息{自動倒數。}地下室{收不到訊號}也能記，{恢復連線後}自動同步。',
           bullets: ['精確記錄組數、重量、次數和{休息時間}', '公斤、磅隨時切換；支援超級組{（建立與編輯需 Pro）}'],
           tags: ['free'],
@@ -101,8 +105,9 @@ export const CONTENT: Record<Lang, ContentData> = {
         },
         {
           ui: ['fatigue'],
-          eyebrow: '肌肉疲勞度',
-          title: '還沒恢復的部位，{直接標在人體圖上}',
+          name: '肌肉疲勞度',
+          icon: Activity,
+          lead: '還沒恢復的部位，{直接標在人體圖上}',
           body: '依最近 7 天的訓練，標出各部位的{疲勞程度；}選到{疲勞偏高部位}的動作會提醒你，{覺得不準}也能手動調整。',
           bullets: ['依今天練的部位推薦{熱身和伸展}'],
           tags: ['free'],
@@ -110,8 +115,9 @@ export const CONTENT: Record<Lang, ContentData> = {
         },
         {
           ui: ['demo'],
-          eyebrow: '動作庫',
-          title: '動作做對，再來加重',
+          name: '動作庫',
+          icon: CirclePlay,
+          lead: '動作做對，再來加重',
           body: '超過 300 個動作，附 3D 示範動畫和{逐步要點。}',
           bullets: ['依器材或部位搜尋，也能加上 YouTube 連結或{自己的筆記}'],
           tags: ['free'],
@@ -119,8 +125,9 @@ export const CONTENT: Record<Lang, ContentData> = {
         },
         {
           ui: ['metrics'],
-          eyebrow: '指標・個人紀錄',
-          title: '每個動作的進步，{都留下軌跡}',
+          name: '指標・個人紀錄',
+          icon: TrendingUp,
+          lead: '每個動作的進步，{都留下軌跡}',
           body: '每個動作都有自己的個人紀錄、預估 1RM 趨勢、總訓練量，以及{重量與次數}的圖表。',
           bullets: ['練完產生分享圖卡，{要顯示哪些內容自己選}', '用日曆排課、標記休息日，{連續訓練一看就知道}'],
           tags: ['free'],
@@ -128,8 +135,9 @@ export const CONTENT: Record<Lang, ContentData> = {
         },
         {
           ui: ['calendar'],
-          eyebrow: '好友・學員',
-          title: '跟夥伴一起練，也能帶學員',
+          name: '好友・學員',
+          icon: Users,
+          lead: '跟夥伴一起練，也能帶學員',
           body: '把計畫或課程{傳給好友，}{對方練完}你會{收到通知。}教練版可以{邀請學員，}對方接受後，{你就能查看}他的{訓練日曆與紀錄，}{並直接指派課表。}',
           bullets: ['加好友免費；分享課表需 Pro', '教練版內含 10 個學員席位，{可加購席位包}；{學員可以隨時自行解除連結}'],
           tags: ['pro', 'coach'],
@@ -375,20 +383,22 @@ export const CONTENT: Record<Lang, ContentData> = {
       chapters: [
         {
           ui: ['plan', 'setup'],
-          eyebrow: 'Specialized AI Coach',
-          title: 'A long-term plan that keeps adjusting to you',
+          name: 'Specialized AI coach',
+          icon: BrainCircuit,
+          lead: 'A long-term plan that keeps adjusting to you',
           body: 'Share your goal, experience, training days, and equipment. AI lays out a periodized plan of 8, 12, or 16\u00a0weeks, then reviews how each week went before building the next.',
           bullets: [
             'Continuously personalized: AI keeps refining each new week from your logs and\u00a0check\u2011ins',
             'Preview the full plan blueprint for free before you commit',
           ],
           tags: ['points'],
-          alt: 'AI Evolving Plan: week 3 of a 12-week plan with its accumulation and intensification blocks',
+          alt: 'Plan overview: week 3 of a 12-week plan with its accumulation and intensification blocks',
         },
         {
           ui: ['checkin'],
-          eyebrow: 'Weekly check-in',
-          title: 'Tell your AI coach how the week went',
+          name: 'Weekly check-in',
+          icon: MessageSquareText,
+          lead: 'Tell your AI coach how the week went',
           body: "Check in on sleep, soreness, any pain, and next week's equipment, and next week is built around it. Report pain, and affected exercises are swapped for gentler ones or left out.",
           bullets: [
             'Something came up? Tweak this week anytime: swap exercises, cut volume only, or let your AI\u00a0coach decide',
@@ -399,8 +409,9 @@ export const CONTENT: Record<Lang, ContentData> = {
         },
         {
           ui: ['smartfill'],
-          eyebrow: 'Smart Fill',
-          title: 'Know what to load before you lift',
+          name: 'Smart Fill',
+          icon: WandSparkles,
+          lead: 'Know what to load before you lift',
           body: 'Smart Fill estimates a 1RM baseline from your history, then suggests every set\'s weight at your target RIR (2 reps in reserve by default). Apply one by one, all at once, or skip.',
           bullets: ['Suggestions get closer to your real strength as you log more'],
           tags: ['points'],
@@ -408,8 +419,9 @@ export const CONTENT: Record<Lang, ContentData> = {
         },
         {
           ui: ['logging'],
-          eyebrow: 'Workout logging',
-          title: 'One tap per set. No signal needed.',
+          name: 'Workout logging',
+          icon: ListChecks,
+          lead: 'One tap per set. No signal needed.',
           body: "Tap when a set is done and your rest timer starts on its own. No signal in the basement gym? Keep logging; it syncs when you're back online.",
           bullets: [
             'Log sets, weight, reps, and rest times precisely',
@@ -420,8 +432,9 @@ export const CONTENT: Record<Lang, ContentData> = {
         },
         {
           ui: ['fatigue'],
-          eyebrow: 'Muscle Fatigue',
-          title: "See what's still recovering, right on the body map",
+          name: 'Muscle fatigue',
+          icon: Activity,
+          lead: "See what's still recovering, right on the body map",
           body: "Body maps show each muscle group's fatigue from your last 7\u00a0days. You'll get a heads-up when you pick a worn-out muscle, and you can adjust the readings yourself.",
           bullets: ["Warm-ups and stretches picked for today's muscles"],
           tags: ['free'],
@@ -429,8 +442,9 @@ export const CONTENT: Record<Lang, ContentData> = {
         },
         {
           ui: ['demo'],
-          eyebrow: 'Exercise library',
-          title: 'Get the form right, then add the weight',
+          name: 'Exercise library',
+          icon: CirclePlay,
+          lead: 'Get the form right, then add the weight',
           body: 'More than 300 exercises with 3D demo animations and step-by-step cues.',
           bullets: ['Search by equipment or muscle, and add YouTube links or your own notes'],
           tags: ['free'],
@@ -438,8 +452,9 @@ export const CONTENT: Record<Lang, ContentData> = {
         },
         {
           ui: ['metrics'],
-          eyebrow: 'Metrics · PRs',
-          title: 'Watch every lift move forward',
+          name: 'Metrics & PRs',
+          icon: TrendingUp,
+          lead: 'Watch every lift move forward',
           body: 'Every exercise gets its own personal records, estimated 1RM trend, total volume, and a chart of weight against reps.',
           bullets: [
             'Finish a workout and make a share card; you choose what it shows',
@@ -450,8 +465,9 @@ export const CONTENT: Record<Lang, ContentData> = {
         },
         {
           ui: ['calendar'],
-          eyebrow: 'Friends · Students',
-          title: 'Train with friends. Coach your students.',
+          name: 'Friends & students',
+          icon: Users,
+          lead: 'Train with friends. Coach your students.',
           body: 'Share a plan or session with friends and get notified when they finish. With Coach, invite students; once they accept, see their training calendar and history and assign them programs.',
           bullets: [
             'Adding friends is free; sharing plans requires Pro',

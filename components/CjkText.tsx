@@ -17,6 +17,16 @@ const HAN_END = /[\u3400-\u9fff\uf900-\ufaff]$/;
 const TAIL_TOKEN = /^[\u3400-\u9fff\uf900-\ufaff，。、！？：；「」『』（）…]+$/;
 const TAIL_MIN_HAN = 3;
 const TAIL_MAX_CHARS = 8;
+/**
+ * 全形標點後（，。、：）、全形左括號前可以換行。Chrome 在 keep-all 下本來就允許，
+ * 但 Safari（WebKit）的 keep-all 會連標點旁的斷點一起拿掉：整句「練了什麼，再排好下一週。今天…」
+ * 變成一個拆不開的長字串，min-content 撐寬容器（首屏手機版影片因此偏右），窄欄只能靠 break-word 從詞中間硬拆。
+ * 這裡明確補上 <wbr>，讓兩個瀏覽器的斷行一致。
+ */
+const BREAK_AFTER = /[，。、！？；：」』）…＞]$/;
+const OPEN_START = /^[（「『]/;
+/** 這些字元前面不能斷行（句讀、右括號、間隔號）。 */
+const NO_BREAK_BEFORE = /^[，。、！？；：」』）…・]/;
 
 const segmenter: Intl.Segmenter | null = (() => {
   try {
@@ -118,12 +128,20 @@ function tailStart(tokens: Token[]): number {
   return i;
 }
 
+/**
+ * 兩個 token 之間要不要補 <wbr>：「漢字｜漢字」之間（keep-all 會把這裡的預設斷點拿掉）、
+ * 全形標點與選單路徑的「＞」後面、全形左括號前面。前一個 token 以空白結尾時本來就能換行，不必補。
+ */
+function breakBetween(prev: string, next: string): boolean {
+  if (NO_BREAK_BEFORE.test(next) || /\s$/.test(prev)) return false;
+  return (HAN_END.test(prev) && HAN_START.test(next)) || BREAK_AFTER.test(prev) || (OPEN_START.test(next) && !OPEN_START.test(prev.slice(-1)));
+}
+
 function renderTokens(tokens: Token[], keyPrefix: string): React.ReactNode[] {
   const out: React.ReactNode[] = [];
   tokens.forEach((t, i) => {
     const prev = tokens[i - 1];
-    // 「漢字｜漢字」之間需要補斷點（keep-all 會把這裡的預設斷點拿掉）；選單路徑的「＞」後面也可以換行。
-    if (segmenter && prev && ((HAN_END.test(prev.text) && HAN_START.test(t.text)) || prev.text.endsWith('＞'))) {
+    if (segmenter && prev && breakBetween(prev.text, t.text)) {
       out.push(<wbr key={`${keyPrefix}w${i}`} />);
     }
     out.push(
@@ -147,7 +165,7 @@ export function cjkNodes(text: string, tail = true): React.ReactNode[] {
   if (cut < tokens.length) {
     const last = tokens.slice(cut);
     const prev = tokens[cut - 1];
-    if (segmenter && prev && HAN_END.test(prev.text) && HAN_START.test(last[0].text)) body.push(<wbr key="tw" />);
+    if (segmenter && prev && breakBetween(prev.text, last[0].text)) body.push(<wbr key="tw" />);
     body.push(
       <span key="tail" className="whitespace-nowrap">
         {last.map((t) => t.text).join('')}

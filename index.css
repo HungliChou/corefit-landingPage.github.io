@@ -396,23 +396,50 @@ button.icon-btn:hover { background: var(--surface-2); }
   z-index: 1;
 }
 
-/* 小標＋方案標籤列：卡片內的標籤略小、標籤之間不拆行，英文小標字距略收，
-   1024 寬的三欄卡片裡「FRIENDS · STUDENTS＋Pro＋Coach」也排得進一行，同一列卡片的標題才會對齊。 */
-.feat__tags { display: inline-flex; flex-wrap: nowrap; gap: 6px; }
-.feat .plan-badge { height: 22px; padding: 0 8px; }
-:lang(en) .feat .eyebrow { letter-spacing: 0.1em; }
-/* <1024 滑動列：英文小標較長，部分卡片的標籤會換到第二行；所有卡片都預留兩行高度，標題起點一致 */
-@media (max-width: 1023px) {
-  :lang(en) .feat__meta { min-height: 50px; align-content: flex-start; }
+/* 文字區往上疊 18px：圖示＋標籤那一列跨在舞台下緣（淡出帶已接近卡片底色），不另外多佔一整列高度，
+   手機上整張卡片加上下方進度點與按鈕仍能一次看完。文字區要蓋在舞台的淡出層（z-index 2）上面。 */
+.feat__body { position: relative; z-index: 3; margin-top: -18px; padding: 0 20px 20px; }
+@media (min-width: 1280px) { .feat__body { padding: 0 24px 24px; } }
+
+/* 卡片標題區：第一列是圖示（左）＋方案標籤（右），第二列是功能名稱（h3）獨佔整行。
+   每張卡的圖示列高度相同，名稱的起點一致；DOM 裡名稱排在最前面（見 Story.tsx）。 */
+.feat__head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas: "icon tags" "name name";
+  align-items: center;
+  column-gap: 10px;
+  row-gap: 12px;
 }
+.feat__icon {
+  grid-area: icon;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  color: #d3deff;
+  /* 最底層墊卡片底色：圖示跨在舞台下緣，半透明漸層底下不能透出 App 畫面 */
+  background: linear-gradient(135deg, rgba(47, 107, 255, 0.34), rgba(124, 77, 255, 0.30)), var(--surface);
+  box-shadow: inset 0 0 0 1px rgba(143, 176, 255, 0.22), 0 8px 20px -10px rgba(47, 107, 255, 0.8);
+}
+.feat__tags { grid-area: tags; justify-self: end; display: inline-flex; flex-wrap: nowrap; gap: 6px; }
+.feat .plan-badge { height: 22px; padding: 0 8px; }
+/* CorePoints 標籤原本是透明底的外框樣式；在卡片裡跨在舞台下緣，墊上卡片底色才不會透出 App 畫面 */
+.feat .plan-badge--points { background: var(--surface); }
 
-.feat__body { padding: 16px 20px 20px; }
-@media (min-width: 1280px) { .feat__body { padding: 18px 24px 24px; } }
+/* 功能名稱：卡片裡最大、最粗的字，一眼就看得出「這是哪個功能」 */
+.feat__name { grid-area: name; font-size: 23px; line-height: 1.25; color: var(--text); text-wrap: balance; }
+:lang(zh) .feat__name { font-weight: 900; letter-spacing: 0.02em; text-wrap: wrap; }
+:lang(en) .feat__name { font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
+@media (min-width: 1280px) { .feat__name { font-size: 25px; } }
 
-.feat__title { font-size: 18px; line-height: 1.35; text-wrap: balance; }
-:lang(zh) .feat__title { font-weight: 900; text-wrap: wrap; }
-:lang(en) .feat__title { font-weight: 700; letter-spacing: -0.01em; }
-@media (min-width: 1280px) { .feat__title { font-size: 19px; } }
+/* 副標：一句話說明功能做什麼，比內文亮、比名稱小 */
+.feat__lead { margin-top: 6px; font-size: 16px; line-height: 1.5; color: #dce2f0; text-wrap: balance; }
+:lang(zh) .feat__lead { font-weight: 500; text-wrap: wrap; }
+:lang(en) .feat__lead { font-weight: 600; line-height: 1.4; letter-spacing: -0.005em; }
+@media (min-width: 1280px) { .feat__lead { font-size: 17px; } }
 
 .feat__copy {
   font-size: 15px;
@@ -452,13 +479,18 @@ button.icon-btn:hover { background: var(--surface-2); }
     justify-content: center;
     padding: 28px 8px 28px 32px;
   }
-  .feat__title--lg { font-size: clamp(1.375rem, 0.9rem + 0.9vw, 1.75rem); line-height: 1.3; }
+  /* 大卡的文字在舞台左邊，不必往上疊 */
+  .feat--wide .feat__body { margin-top: 0; }
+  .feat--wide .feat__head { row-gap: 16px; }
+  .feat--wide .feat__icon { width: 40px; height: 40px; border-radius: 12px; }
+  .feat__name--lg { font-size: clamp(1.875rem, 0.9rem + 1.6vw, 2.375rem); line-height: 1.2; }
+  .feat__lead--lg { margin-top: 8px; font-size: clamp(1.0625rem, 0.8rem + 0.45vw, 1.25rem); }
 }
 @media (min-width: 1280px) {
   .feat--wide .feat__stage { width: 54%; }
 }
 @media (min-width: 1024px) {
-  :lang(en) .feat__title--lg { font-weight: 800; line-height: 1.15; letter-spacing: -0.015em; }
+  :lang(en) .feat__name--lg { line-height: 1.1; letter-spacing: -0.025em; }
   .feat--wide .feat__copy { font-size: 16px; }
   .feat--wide .feat__bullet { font-size: 15px; }
   /* 兩張完整的介面在舞台內上下排、不重疊：上方靠左是計畫設定（計畫長度、每週訓練日），

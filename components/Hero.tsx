@@ -33,8 +33,10 @@ const Hero: React.FC<HeroProps> = ({ content, lang }) => {
     <section id="top" aria-labelledby="hero-title" className="relative isolate overflow-x-clip">
       <div className="hero-glow -z-10" aria-hidden="true" />
       <div className="wrap hero-layout pb-16 pt-5 md:py-16 lg:py-12">
-        <div className="grid w-full items-center gap-8 md:grid-cols-[minmax(0,1fr)_auto] md:gap-10 lg:grid-cols-12 lg:gap-8">
-          <div className="md:max-w-[420px] lg:col-span-7 lg:max-w-none">
+        {/* 手機版明確設成單欄 minmax(0,1fr)：沒有設欄寬時，隱含的 auto 欄會被文字的 min-content 撐寬
+         * （Safari 曾因此把欄撐到 480px，影片在過寬的欄裡置中，看起來整個偏右）。兩個子項也加 min-w-0。 */}
+        <div className="grid w-full grid-cols-[minmax(0,1fr)] items-center gap-8 md:grid-cols-[minmax(0,1fr)_auto] md:gap-10 lg:grid-cols-12 lg:gap-8">
+          <div className="min-w-0 md:max-w-[420px] lg:col-span-7 lg:max-w-none">
             <m.p className="eyebrow mb-3 md:mb-6" {...item(0)}>
               <CjkText text={hero.eyebrow} tail={false} />
             </m.p>
@@ -72,7 +74,7 @@ const Hero: React.FC<HeroProps> = ({ content, lang }) => {
           </div>
 
           <m.div
-            className="flex justify-center lg:col-span-5"
+            className="flex min-w-0 justify-center lg:col-span-5"
             {...(reduced
               ? {}
               : {

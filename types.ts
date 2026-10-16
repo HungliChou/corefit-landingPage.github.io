@@ -16,8 +16,12 @@ export type UiShot = 'plan' | 'setup' | 'checkin' | 'smartfill' | 'logging' | 'f
 export interface Chapter {
   /** 卡片配圖：第一張是主圖；第二張只在桌機大卡上疊在主圖後方。 */
   ui: [UiShot] | [UiShot, UiShot];
-  eyebrow: string;
-  title: string;
+  /** 功能名稱，卡片的主標題（h3），例如「智能填重」。 */
+  name: string;
+  /** 名稱旁的小圖示。 */
+  icon: LucideIcon;
+  /** 名稱下方一句話說明這個功能做什麼（副標）。 */
+  lead: string;
   body: string;
   bullets: string[];
   tags: PlanTag[];
