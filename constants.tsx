@@ -1,4 +1,4 @@
-import { Activity, Bell, BookOpen, BrainCircuit, CirclePlay, ClipboardList, Languages, ListChecks, MessageSquareText, ShieldCheck, Sparkles, TrendingUp, Users, WandSparkles } from 'lucide-react';
+import { Activity, Bell, BookOpen, BrainCircuit, CirclePlay, ClipboardList, ListChecks, RefreshCw, Sparkles, TrendingUp, Users, WandSparkles } from 'lucide-react';
 import type { ContentData, Lang } from './types';
 import appStoreBadgeEn from './app-store-badge-en.svg';
 import appStoreBadgeZhTw from './app-store-badge-zh-tw.svg';
@@ -72,16 +72,16 @@ export const CONTENT: Record<Lang, ContentData> = {
         },
         {
           ui: ['checkin'],
-          name: '每週狀況回報',
-          icon: MessageSquareText,
-          lead: '這週過得怎樣，{跟 AI 教練說}',
-          body: '回報睡眠、痠痛、疼痛部位和{下週器材，}下一週就照這些排；回報疼痛後，相關動作會換成{較溫和的替代動作}或先移除。',
+          name: '每週依狀況自動調整',
+          icon: RefreshCw,
+          lead: '回報這週狀況，{下一週自動跟著調整}',
+          body: 'AI 依你回報的睡眠、痠痛、疼痛部位和{下週器材，}自動調整下一週的課表；回報疼痛後，相關動作會換成{較溫和的替代動作}或先移除。',
           bullets: [
             '{週中有狀況？}隨時請 AI 微調本週：{換動作}、{只減量}，或{交給 AI 教練決定}',
             'AI 教練會整理這週的完成率和重點，{說明為什麼這樣排}',
           ],
           tags: ['points'],
-          alt: '本週狀況回報：用 1 到 5 分回報睡眠品質與肌肉痠痛',
+          alt: '每週依狀況調整：用 1 到 5 分回報睡眠品質與肌肉痠痛，作為調整下一週課表的依據',
         },
         {
           ui: ['smartfill'],
@@ -174,17 +174,6 @@ export const CONTENT: Record<Lang, ContentData> = {
           icon: Bell,
           title: '提醒與通知',
           body: '訓練日提醒、未完成訓練提醒；教練或好友{傳來新課表時，}{也會通知你。}',
-        },
-        {
-          icon: Languages,
-          title: '中英文介面',
-          body: '介面支援繁體中文與英文，可以用 Email、Google 或 Apple 帳號登入。',
-        },
-        {
-          icon: ShieldCheck,
-          title: '帳號由你決定',
-          body: '不想用了，可以直接在 App 內刪除帳號。了解刪除流程',
-          link: { text: '了解刪除流程', href: '/delete-account/' },
         },
       ],
     },
@@ -372,7 +361,7 @@ export const CONTENT: Record<Lang, ContentData> = {
         items: [
           [{ text: 'Free to start' }],
           [{ text: 'iPhone only (iOS 15.6 or later)' }],
-          [{ text: 'English & ' }, { text: '繁體中文', lang: 'zh-Hant' }],
+          [{ text: 'English & Traditional Chinese' }],
         ],
       },
     },
@@ -396,16 +385,16 @@ export const CONTENT: Record<Lang, ContentData> = {
         },
         {
           ui: ['checkin'],
-          name: 'Weekly check-in',
-          icon: MessageSquareText,
-          lead: 'Tell your AI coach how the week went',
-          body: "Check in on sleep, soreness, any pain, and next week's equipment, and next week is built around it. Report pain, and affected exercises are swapped for gentler ones or left out.",
+          name: 'Auto-adjusts every week',
+          icon: RefreshCw,
+          lead: 'Check in, and next week adapts to you',
+          body: "AI adjusts next week around the sleep, soreness, pain, and equipment you report. Report pain, and affected exercises are swapped for gentler ones or left out.",
           bullets: [
             'Something came up? Tweak this week anytime: swap exercises, cut volume only, or let your AI\u00a0coach decide',
             'Your AI coach recaps the week and explains the thinking behind the plan',
           ],
           tags: ['points'],
-          alt: 'Weekly check-in: rating sleep quality and muscle soreness from 1 to 5',
+          alt: 'Weekly adjustment: rating sleep quality and muscle soreness from 1 to 5, which shapes next week',
         },
         {
           ui: ['smartfill'],
@@ -507,17 +496,6 @@ export const CONTENT: Record<Lang, ContentData> = {
           icon: Bell,
           title: 'Reminders',
           body: 'Training-day and missed-workout reminders, plus a heads-up when a coach or friend sends you a new plan.',
-        },
-        {
-          icon: Languages,
-          title: 'English & Chinese',
-          body: 'Use the app in English or Traditional Chinese, and sign in with email, Google, or Apple.',
-        },
-        {
-          icon: ShieldCheck,
-          title: 'Your account, your call',
-          body: 'You can delete your account right in the app. How deletion works',
-          link: { text: 'How deletion works', href: '/en/delete-account/' },
         },
       ],
     },
