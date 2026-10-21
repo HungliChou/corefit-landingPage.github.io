@@ -710,6 +710,8 @@ button.film-cover:focus-visible { outline-offset: -4px; }
 }
 
 .film-video { width: min(80vw, 320px); }
+/* Showcase 用 App Store 版（886×1920）完整畫面，不裁上下，所以影片框比 9:16 長 */
+.video-card.video-card--film { aspect-ratio: 886 / 1920; }
 /* 桌機：從導覽列「影片」跳過來時，整張影片卡要完整落在視窗內。
  * 錨點停在導覽列（64px）正下方，區塊上方留白縮成 56px，卡片高度扣掉上方 120px 與下方 48px。
  * 1024×768 → 600px、1280×720 → 552px、1440×900 → 720px（上限）。不支援 svh 的瀏覽器沿用 vh。 */
@@ -720,7 +722,7 @@ button.film-cover:focus-visible { outline-offset: -4px; }
     height: min(calc(100vh - 168px), 720px);
     height: max(420px, min(calc(100svh - 168px), 720px));
     width: auto;
-    aspect-ratio: 9 / 16;
+    aspect-ratio: 886 / 1920;
   }
 }
 
