@@ -195,7 +195,6 @@ export const CONTENT: Record<Lang, ContentData> = {
       title: '{花 30 秒，}{看看 CoreFit}',
       body: '從 AI 演進計畫、智能填重、肌肉疲勞度，到{跟夥伴一起練}，一次看完。建議開聲音觀看。',
       closing: '訓練，可以很簡單。',
-      disclosure: '影片中的人物為 AI 生成影像。',
     },
     plans: {
       eyebrow: '方案',
@@ -523,7 +522,6 @@ export const CONTENT: Record<Lang, ContentData> = {
       title: 'See CoreFit in 30 seconds',
       body: 'The AI\u00a0Evolving\u00a0Plan, Smart Fill, muscle fatigue, and training with friends, all in one go. Best with sound on.',
       closing: 'Training, made simple.',
-      disclosure: 'People shown in this video are AI-generated.',
     },
     plans: {
       eyebrow: 'Plans',

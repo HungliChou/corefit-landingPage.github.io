@@ -106,7 +106,7 @@ export interface ContentData {
   };
   more: { eyebrow: string; title: string; items: MoreItem[] };
   how: { eyebrow: string; title: string; steps: Step[]; note: string };
-  film: { eyebrow: string; title: string; body: string; closing: string; disclosure: string };
+  film: { eyebrow: string; title: string; body: string; closing: string };
   plans: {
     eyebrow: string;
     title: string;

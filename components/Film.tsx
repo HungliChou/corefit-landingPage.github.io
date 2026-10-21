@@ -37,9 +37,6 @@ const Film: React.FC<{ content: ContentData; lang: Lang }> = ({ content, lang })
           <p className="film-closing text-grad">
             <CjkText text={film.closing} tail={false} />
           </p>
-          <p className="fine balance-en mt-3">
-            <CjkText text={film.disclosure} />
-          </p>
         </div>
       </div>
     </section>
