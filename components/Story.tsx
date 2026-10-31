@@ -17,8 +17,8 @@ interface StoryProps {
  */
 const UI_W = 400;
 const UI_H: Record<Lang, Record<UiShot, number>> = {
-  zh: { setup: 230, plan: 223, checkin: 278, smartfill: 192, logging: 315, fatigue: 342, demo: 232, metrics: 261, calendar: 206 },
-  en: { setup: 230, plan: 223, checkin: 278, smartfill: 204, logging: 315, fatigue: 342, demo: 232, metrics: 261, calendar: 206 },
+  zh: { setup: 230, plan: 223, checkin: 278, smartfill: 192, logging: 315, fatigue: 342, demo: 232, metrics: 261, calendar: 206, matrix: 361 },
+  en: { setup: 230, plan: 223, checkin: 278, smartfill: 204, logging: 315, fatigue: 342, demo: 232, metrics: 261, calendar: 206, matrix: 361 },
 };
 
 /** 卡片舞台光暈：前段藍、中段藍紫、後段紫（沿用原本章節的色彩節奏）。 */

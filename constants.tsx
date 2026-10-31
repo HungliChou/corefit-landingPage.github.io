@@ -21,7 +21,7 @@ export const CONTENT: Record<Lang, ContentData> = {
       pause: '暫停影片',
       play: '播放影片',
       heroVideoDesc:
-        '靜音循環播放的 CoreFit 介紹影片，約 27 秒：開頭是標語「訓練可以很聰明」，接著是 App 畫面：AI 教練的 12 週週期化計畫與每週回顧、智能填重一鍵套用、一鍵完成每組、個人紀錄走勢，以及官方計畫、隨時微調、肌肉疲勞度與動作示範，最後以 CoreFit 標誌收尾。',
+        '靜音循環播放的 CoreFit 介紹影片，約 27 秒：開頭是標語「訓練可以很聰明」，接著是 App 畫面：AI 教練的 12 週週期化計畫與每週回顧、智能填重一鍵套用、一鍵完成每組、個人紀錄走勢，以及官方計畫、隨時微調、教練版團隊分析、動作示範與完成矩陣，最後以 CoreFit 標誌收尾。',
       filmPlay: '播放 CoreFit 介紹影片（有聲）',
       filmVideoLabel: 'CoreFit 介紹影片',
     },
@@ -134,14 +134,17 @@ export const CONTENT: Record<Lang, ContentData> = {
           alt: '動作指標：最大重量（1RM）走勢圖，標出最近一次的峰值',
         },
         {
-          ui: ['calendar'],
-          name: '好友・學員',
+          ui: ['matrix'],
+          name: '夥伴・教練版',
           icon: Users,
-          lead: '跟夥伴一起練，也能帶學員',
-          body: '把計畫或課程{傳給好友，}{對方練完}你會{收到通知。}教練版可以{邀請學員，}對方接受後，{你就能查看}他的{訓練日曆與紀錄，}{並直接指派課表。}',
-          bullets: ['加好友免費；分享課表需 Pro', '教練版內含 10 個學員席位，{可加購席位包}；{學員可以隨時自行解除連結}'],
+          lead: '跟夥伴一起練，也能整隊帶學員',
+          body: '課表可以{傳給好友，}{對方練完}你會{收到通知。}教練版能{把學員分成團隊、}{整份計畫一次指派，}用{完成矩陣}和{團隊與學員分析}{掌握每個人的進度。}',
+          bullets: [
+            '加好友免費；分享課表需 Pro',
+            '教練版內含 10 個學員席位，{可加購席位包}；{學員可以隨時自行解除連結}',
+          ],
           tags: ['pro', 'coach'],
-          alt: '教練查看學員的訓練月曆，日期上標示已排的課程',
+          alt: '完成矩陣：每位學員一列、每堂課一欄，標出完成、請假、缺席與未完成',
         },
       ],
       swipeHint: '左右滑動看更多',
@@ -193,7 +196,7 @@ export const CONTENT: Record<Lang, ContentData> = {
     film: {
       eyebrow: '影片',
       title: '{花 30 秒，}{看看 CoreFit}',
-      body: '從 AI 演進計畫、智能填重、肌肉疲勞度，到{跟夥伴一起練}，一次看完。建議開聲音觀看。',
+      body: '從 AI 演進計畫、智能填重、肌肉疲勞度，到{教練版整隊指派}，一次看完。建議開聲音觀看。',
       closing: '訓練，可以很簡單。',
     },
     plans: {
@@ -231,6 +234,8 @@ export const CONTENT: Record<Lang, ContentData> = {
           items: [
             '邀請學員，對方接受後可查看{訓練日曆與紀錄}',
             '直接把課表指派給學員',
+            '把學員分成團隊，{整份計畫一次指派給全隊}',
+            '完成矩陣、團隊與學員分析，{自動提醒需要關心的學員}',
             '內含 10 個學員席位，{可加購席位包}',
             '每月重置為 450 點 CorePoints（{不累積}）',
           ],
@@ -265,7 +270,7 @@ export const CONTENT: Record<Lang, ContentData> = {
         },
         {
           q: 'Pro 和教練版差在哪裡？',
-          a: 'Pro 解鎖全部官方計畫與課程、不限數量的計畫與模板、超級組，以及把課表分享給夥伴。教練版包含 Pro 的全部功能，再加上{學員管理}：可以邀請學員（對方接受後才能查看他的訓練紀錄），並直接把課表指派給學員；內含 {10 個學員席位。}',
+          a: 'Pro 解鎖全部官方計畫與課程、不限數量的計畫與模板、超級組，以及把課表分享給夥伴。教練版包含 Pro 的全部功能，再加上{學員管理}：可以邀請學員（對方接受後才能查看他的訓練紀錄），並直接把課表指派給學員；也能把學員分成團隊、{一次指派整份計畫，}再用{完成矩陣}和{團隊與學員分析}掌握每個人的進度。學員看不到團隊名單和你的私人備註；{課表標題要不要帶隊名，}{由你決定。}內含 {10 個學員席位。}',
         },
         {
           q: '有免費試用嗎？',
@@ -330,7 +335,7 @@ export const CONTENT: Record<Lang, ContentData> = {
       pause: 'Pause video',
       play: 'Play video',
       heroVideoDesc:
-        'A silent, looping 27-second CoreFit demo: an opening line ("Train smarter, not harder."), then app screens showing the AI coach\'s 12-week periodized plan and weekly recap, applying Smart Fill in one tap, one-tap set logging, personal record trends, official programs, mid-week tweaks, muscle fatigue, and exercise demos, ending on the CoreFit logo.',
+        'A silent, looping 27-second CoreFit demo: an opening line ("Train smarter, not harder."), then app screens showing the AI coach\'s 12-week periodized plan and weekly recap, applying Smart Fill in one tap, one-tap set logging, personal record trends, official programs, mid-week tweaks, Coach team analytics, exercise demos, and the Coach completion matrix, ending on the CoreFit logo.',
       filmPlay: 'Play the CoreFit overview video (with sound)',
       filmVideoLabel: 'CoreFit overview video',
     },
@@ -452,17 +457,17 @@ export const CONTENT: Record<Lang, ContentData> = {
           alt: 'Exercise metrics: the estimated 1RM trend chart with the latest peak marked',
         },
         {
-          ui: ['calendar'],
-          name: 'Friends & students',
+          ui: ['matrix'],
+          name: 'Partners & Coach',
           icon: Users,
-          lead: 'Train with friends. Coach your students.',
-          body: 'Share a plan or session with friends and get notified when they finish. With Coach, invite students; once they accept, see their training calendar and history and assign them programs.',
+          lead: 'Train with friends. Coach a whole team.',
+          body: 'Share plans with friends and get notified when they finish. With Coach, assign plans to whole teams and track students with a completion matrix plus team and student analytics.',
           bullets: [
             'Adding friends is free; sharing plans requires Pro',
             'Coach includes 10\u00a0student seats, with extra seat packs available; students can disconnect anytime',
           ],
           tags: ['pro', 'coach'],
-          alt: "A coach viewing a student's monthly training calendar, with scheduled sessions marked on the dates",
+          alt: 'Completion matrix: one row per student and one column per session, marking completed, excused, absent, and overdue sessions',
         },
       ],
       swipeHint: 'Swipe for more',
@@ -520,7 +525,7 @@ export const CONTENT: Record<Lang, ContentData> = {
     film: {
       eyebrow: 'Video',
       title: 'See CoreFit in 30 seconds',
-      body: 'The AI\u00a0Evolving\u00a0Plan, Smart Fill, muscle fatigue, and training with friends, all in one go. Best with sound on.',
+      body: 'The AI\u00a0Evolving\u00a0Plan, Smart Fill, muscle fatigue, and coaching a whole team, all in one go. Best with sound on.',
       closing: 'Training, made simple.',
     },
     plans: {
@@ -558,6 +563,8 @@ export const CONTENT: Record<Lang, ContentData> = {
           items: [
             'Invite students and, once they accept, see their training calendar and history',
             'Assign programs to your students',
+            'Group students into teams and assign a plan to the whole team at once',
+            'Completion matrix, team and student analytics, and alerts for students who need a check-in',
             '10\u00a0student seats included, with extra seat packs available',
             'CorePoints reset to 450 every month (no rollover)',
           ],
@@ -595,7 +602,7 @@ export const CONTENT: Record<Lang, ContentData> = {
         },
         {
           q: "What's the difference between Pro and Coach?",
-          a: 'Pro unlocks every official program and session, unlimited programs and templates, supersets, and sharing with friends. Coach includes everything in Pro plus student management: invite students, see their training once they accept, and assign programs to them. Coach includes 10\u00a0student\u00a0seats.',
+          a: 'Pro unlocks every official program and session, unlimited programs and templates, supersets, and sharing with friends. Coach includes everything in Pro plus student management: invite students, see their training once they accept, and assign programs to them. You can also group students into teams, assign a whole plan at once, and follow everyone\'s progress with the completion matrix and team and student analytics. Students never see your team rosters or private notes, and you choose whether session titles show the team name. Coach includes 10\u00a0student\u00a0seats.',
         },
         {
           q: 'Is there a free trial?',

@@ -11,7 +11,7 @@ export interface InlineLink {
 }
 
 /** 功能卡片用的 App 介面裁圖（public/media/ui-{zh,en}-<name>.webp）。 */
-export type UiShot = 'plan' | 'setup' | 'checkin' | 'smartfill' | 'logging' | 'fatigue' | 'demo' | 'metrics' | 'calendar';
+export type UiShot = 'plan' | 'setup' | 'checkin' | 'smartfill' | 'logging' | 'fatigue' | 'demo' | 'metrics' | 'calendar' | 'matrix';
 
 export interface Chapter {
   /** 卡片配圖：第一張是主圖；第二張只在桌機大卡上疊在主圖後方。 */
