@@ -270,7 +270,7 @@ export const CONTENT: Record<Lang, ContentData> = {
         },
         {
           q: 'Pro 和教練版差在哪裡？',
-          a: 'Pro 解鎖全部官方計畫與課程、不限數量的計畫與模板、超級組，以及把課表分享給夥伴。教練版包含 Pro 的全部功能，再加上{學員管理}：可以邀請學員（對方接受後才能查看他的訓練紀錄），並直接把課表指派給學員；也能把學員分成團隊、{一次指派整份計畫，}再用{完成矩陣}和{團隊與學員分析}掌握每個人的進度。學員看不到團隊名單和你的私人備註；{課表標題要不要帶隊名，}{由你決定。}內含 {10 個學員席位。}',
+          a: 'Pro 解鎖全部官方計畫與課程、不限數量的計畫與模板、超級組，以及把課表分享給夥伴。教練版包含 Pro 的全部功能，再加上{學員管理}：可以邀請學員（對方接受後才能查看他的訓練紀錄），並直接把課表指派給學員；也能把學員分成團隊、{一次指派整份計畫，}再用{完成矩陣}和{團隊與學員分析}掌握每個人的進度。學員看不到團隊名單和你的私人備註；課表標題預設會帶隊名，{每次指派時都可以關掉。}內含 {10 個學員席位。}',
         },
         {
           q: '有免費試用嗎？',
@@ -602,7 +602,7 @@ export const CONTENT: Record<Lang, ContentData> = {
         },
         {
           q: "What's the difference between Pro and Coach?",
-          a: 'Pro unlocks every official program and session, unlimited programs and templates, supersets, and sharing with friends. Coach includes everything in Pro plus student management: invite students, see their training once they accept, and assign programs to them. You can also group students into teams, assign a whole plan at once, and follow everyone\'s progress with the completion matrix and team and student analytics. Students never see your team rosters or private notes, and you choose whether session titles show the team name. Coach includes 10\u00a0student\u00a0seats.',
+          a: 'Pro unlocks every official program and session, unlimited programs and templates, supersets, and sharing with friends. Coach includes everything in Pro plus student management: invite students, see their training once they accept, and assign programs to them. You can also group students into teams, assign a whole plan at once, and follow everyone\'s progress with the completion matrix and team and student analytics. Students never see your team rosters or private notes. Session titles show the team name by default, and you can turn that off each time you assign. Coach includes 10\u00a0student\u00a0seats.',
         },
         {
           q: 'Is there a free trial?',
